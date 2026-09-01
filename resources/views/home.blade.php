@@ -8,21 +8,22 @@
     if(isset($heroBanners) && count($heroBanners) > 0) {
         $heroBg = "url('" . asset('storage/' . str_replace('\\', '/', $heroBanners[0])) . "')";
     }
+    
+    $heroBadge = \App\Models\HomepageSetting::get('hero_badge', '✨ NEW COLLECTION ' . date('Y'));
+    $heroTitle = \App\Models\HomepageSetting::get('hero_title', "বাংলাদেশের\n<span>রঙে</span><br>\nআপনার Fashion");
+    $heroSubtitle = \App\Models\HomepageSetting::get('hero_subtitle', "Premium Panjabi, Saree, Three Piece, T-Shirt,\nShirt এবং নতুন Fashion Collection এখন এক জায়গায়।");
 @endphp
 <section class="hero" style="background-image: linear-gradient(100deg, rgba(20,33,61,.95) 0%, rgba(111,66,193,.80) 47%, rgba(232,62,140,.35) 100%), {!! $heroBg !!}; background-size: cover; background-position: center;">
     <div class="container">
         <div class="hero-content">
             <span class="hero-badge">
-                ✨ NEW COLLECTION {{ date('Y') }}
+                {{ $heroBadge }}
             </span>
             <h1>
-                বাংলাদেশের
-                <span>রঙে</span><br>
-                আপনার Fashion
+                {!! nl2br($heroTitle) !!}
             </h1>
             <p>
-                Premium Panjabi, Saree, Three Piece, T-Shirt,
-                Shirt এবং নতুন Fashion Collection এখন এক জায়গায়।
+                {!! nl2br(e($heroSubtitle)) !!}
             </p>
             <div class="mt-4">
                 <a href="{{ route('shop') }}" class="btn hero-btn hero-btn-primary me-2">
@@ -40,50 +41,27 @@
 <section class="features-area">
     <div class="container">
         <div class="row g-3">
+            @php
+                $features = \App\Models\HomepageSetting::get('features', [
+                    ['icon' => 'bi-truck', 'title' => 'Fast Delivery', 'subtitle' => 'সারাদেশে দ্রুত ডেলিভারি', 'color' => 'icon-orange'],
+                    ['icon' => 'bi-cash-stack', 'title' => 'Cash on Delivery', 'subtitle' => 'পণ্য পেয়ে মূল্য পরিশোধ', 'color' => 'icon-purple'],
+                    ['icon' => 'bi-arrow-repeat', 'title' => 'Easy Exchange', 'subtitle' => 'সহজ Size Exchange', 'color' => 'icon-pink'],
+                    ['icon' => 'bi-shield-check', 'title' => 'Secure Payment', 'subtitle' => 'bKash, Nagad & Card', 'color' => 'icon-green'],
+                ]);
+            @endphp
+            @foreach($features as $feat)
             <div class="col-6 col-lg-3">
                 <div class="feature-card">
-                    <div class="feature-icon icon-orange">
-                        <i class="bi bi-truck"></i>
+                    <div class="feature-icon {{ $feat['color'] ?? 'icon-orange' }}">
+                        <i class="bi {{ $feat['icon'] ?? 'bi-star' }}"></i>
                     </div>
                     <div>
-                        <h6>Fast Delivery</h6>
-                        <p>সারাদেশে দ্রুত ডেলিভারি</p>
+                        <h6>{{ $feat['title'] ?? '' }}</h6>
+                        <p>{{ $feat['subtitle'] ?? '' }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-6 col-lg-3">
-                <div class="feature-card">
-                    <div class="feature-icon icon-purple">
-                        <i class="bi bi-cash-stack"></i>
-                    </div>
-                    <div>
-                        <h6>Cash on Delivery</h6>
-                        <p>পণ্য পেয়ে মূল্য পরিশোধ</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="feature-card">
-                    <div class="feature-icon icon-pink">
-                        <i class="bi bi-arrow-repeat"></i>
-                    </div>
-                    <div>
-                        <h6>Easy Exchange</h6>
-                        <p>সহজ Size Exchange</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="feature-card">
-                    <div class="feature-icon icon-green">
-                        <i class="bi bi-shield-check"></i>
-                    </div>
-                    <div>
-                        <h6>Secure Payment</h6>
-                        <p>bKash, Nagad & Card</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

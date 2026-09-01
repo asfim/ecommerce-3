@@ -16,6 +16,12 @@
       'icon' => 'bi-image',
       'recommendation' => 'Recommended size: 900 x 440 px (Perfect fit)'
     ],
+    'features'               => [
+      'label' => 'Features Section',
+      'max' => 0,
+      'icon' => 'bi-star',
+      'recommendation' => ''
+    ],
     // 'best_selling_banners'   => [
     //   'label' => 'Best Selling Banner',
     //   'max' => 3,
@@ -113,6 +119,72 @@
               <i class="bi bi-info-circle me-1"></i>
               Maximum images reached. Remove an existing image to upload a new one.
             </div>
+          @endif
+
+          @if($key === 'hero_banners')
+            <hr class="my-4">
+            <h6 class="fw-bold mb-3">Hero Section Texts</h6>
+            <form method="POST" action="{{ route('admin.settings.homepage.update', $key) }}">
+              @csrf
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Hero Badge</label>
+                <input type="text" name="hero_badge" class="form-control" value="{{ old('hero_badge', $settings['hero_badge'] ?? '') }}">
+                <div class="form-text">Example: ✨ NEW COLLECTION 2026</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Hero Title</label>
+                <textarea name="hero_title" class="form-control" rows="3">{{ old('hero_title', $settings['hero_title'] ?? '') }}</textarea>
+                <div class="form-text">You can use HTML tags like <code>&lt;span&gt;text&lt;/span&gt;</code> for the yellow highlighted text and <code>&lt;br&gt;</code> for line breaks.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Hero Subtitle</label>
+                <textarea name="hero_subtitle" class="form-control" rows="2">{{ old('hero_subtitle', $settings['hero_subtitle'] ?? '') }}</textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm">
+                <i class="bi bi-save me-1"></i> Save Texts
+              </button>
+            </form>
+          @elseif($key === 'features')
+            <form method="POST" action="{{ route('admin.settings.homepage.update', $key) }}">
+              @csrf
+              @php $features = $settings['features'] ?? []; @endphp
+              
+              <div class="row g-3 mb-4">
+                @for($i = 0; $i < 4; $i++)
+                  @php $feat = $features[$i] ?? []; @endphp
+                  <div class="col-md-6">
+                    <div class="border rounded p-3 bg-light">
+                      <h6 class="fw-bold mb-3">Feature {{ $i + 1 }}</h6>
+                      <div class="mb-2">
+                        <label class="form-label small fw-semibold">Icon Class</label>
+                        <input type="text" name="features[{{ $i }}][icon]" class="form-control form-control-sm" value="{{ $feat['icon'] ?? '' }}" placeholder="bi-truck">
+                      </div>
+                      <div class="mb-2">
+                        <label class="form-label small fw-semibold">Title</label>
+                        <input type="text" name="features[{{ $i }}][title]" class="form-control form-control-sm" value="{{ $feat['title'] ?? '' }}">
+                      </div>
+                      <div class="mb-2">
+                        <label class="form-label small fw-semibold">Subtitle</label>
+                        <input type="text" name="features[{{ $i }}][subtitle]" class="form-control form-control-sm" value="{{ $feat['subtitle'] ?? '' }}">
+                      </div>
+                      <div class="mb-2">
+                        <label class="form-label small fw-semibold">Color Class</label>
+                        <select name="features[{{ $i }}][color]" class="form-select form-select-sm">
+                          <option value="icon-orange" {{ ($feat['color'] ?? '') == 'icon-orange' ? 'selected' : '' }}>Orange</option>
+                          <option value="icon-purple" {{ ($feat['color'] ?? '') == 'icon-purple' ? 'selected' : '' }}>Purple</option>
+                          <option value="icon-pink" {{ ($feat['color'] ?? '') == 'icon-pink' ? 'selected' : '' }}>Pink</option>
+                          <option value="icon-green" {{ ($feat['color'] ?? '') == 'icon-green' ? 'selected' : '' }}>Green</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                @endfor
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-sm">
+                <i class="bi bi-save me-1"></i> Save Features
+              </button>
+            </form>
           @endif
         </div>
       @endif
