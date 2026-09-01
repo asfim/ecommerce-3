@@ -16,12 +16,12 @@
       'icon' => 'bi-image',
       'recommendation' => 'Recommended size: 900 x 440 px (Perfect fit)'
     ],
-    'features'               => [
-      'label' => 'Features Section',
-      'max' => 0,
-      'icon' => 'bi-star',
-      'recommendation' => ''
-    ],
+    // 'features'               => [
+    //   'label' => 'Features Section',
+    //   'max' => 0,
+    //   'icon' => 'bi-star',
+    //   'recommendation' => ''
+    // ],
     // 'best_selling_banners'   => [
     //   'label' => 'Best Selling Banner',
     //   'max' => 3,
@@ -68,7 +68,7 @@
 
           {{-- Current Images --}}
           @php $current = $settings[$key] ?? []; @endphp
-          @if(count($current) > 0)
+          @if($info['max'] > 0 && count($current) > 0)
             <div class="mb-4">
               <label class="form-label fw-semibold small">Current Images</label>
               <form method="POST" action="{{ route('admin.settings.homepage.update', $key) }}" id="delete-form-{{ $key }}">
@@ -92,7 +92,7 @@
           @endif
 
           {{-- Upload Form --}}
-          @if(count($current) < $info['max'])
+          @if($info['max'] > 0 && count($current) < $info['max'])
             <form method="POST" action="{{ route('admin.settings.homepage.update', $key) }}"
                   enctype="multipart/form-data">
               @csrf
@@ -114,7 +114,7 @@
                 <i class="bi bi-upload me-1"></i> Save Images
               </button>
             </form>
-          @else
+          @elseif($info['max'] > 0)
             <div class="alert alert-info py-2 small">
               <i class="bi bi-info-circle me-1"></i>
               Maximum images reached. Remove an existing image to upload a new one.

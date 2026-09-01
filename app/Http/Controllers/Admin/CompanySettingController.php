@@ -76,6 +76,7 @@ class CompanySettingController extends Controller implements HasMiddleware
             'phone' => $validated['phone'] ?? '',
             'email' => $validated['email'] ?? '',
             'whatsapp' => $validated['whatsapp'] ?? '',
+            'top_bar_text' => $request->input('top_bar_text', ''),
             'google_map' => $validated['google_map'] ?? '',
             'facebook' => $validated['facebook'] ?? '',
             'twitter' => $validated['twitter'] ?? '',

@@ -2,6 +2,8 @@
     $companySettings = \App\Models\HomepageSetting::get('company_settings', []);
     $companyName = $companySettings['name'] ?? 'eCommerce';
     $companyLogo = $companySettings['logo'] ?? null;
+    $companyPhone = $companySettings['phone'] ?? '01XXXXXXXXX';
+    $topBarText = $companySettings['top_bar_text'] ?? '🇧🇩 সারাদেশে ডেলিভারি <strong>Cash on Delivery Available</strong>';
     $maxDiscountPercent = \App\Models\Product::where('discount_type', 'percent')->where('discount_value', '>', 0)->frontendActive()->max('discount_value') ?? 0;
     $maxDiscountPercent = round($maxDiscountPercent);
 @endphp
@@ -11,11 +13,10 @@
     <div class="container">
         <div class="d-flex justify-content-between">
             <div>
-                🇧🇩 সারাদেশে ডেলিভারি
-                <strong>Cash on Delivery Available</strong>
+                {!! $topBarText !!}
             </div>
             <div class="d-none d-md-block">
-                Hotline: 01XXXXXXXXX
+                Hotline: {{ $companyPhone }}
             </div>
         </div>
     </div>

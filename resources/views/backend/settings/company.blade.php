@@ -47,6 +47,13 @@
     </div>
 
     <div class="mb-3">
+      <label class="form-label fw-bold">Top Bar Text (Left)</label>
+      <input type="text" name="top_bar_text" class="form-control" value="{{ old('top_bar_text', $settings['top_bar_text'] ?? '🇧🇩 সারাদেশে ডেলিভারি <strong>Cash on Delivery Available</strong>') }}" placeholder="e.g. 🇧🇩 সারাদেশে ডেলিভারি Cash on Delivery Available" style="border-color: #a1a1a1 !important;">
+      <div class="form-text text-muted">You can use HTML tags like <code>&lt;strong&gt;</code> here.</div>
+      @error('top_bar_text') <div class="text-danger small">{{ $message }}</div> @enderror
+    </div>
+
+    <div class="mb-3">
       <label class="form-label fw-bold">Company Logo</label>
       @if(!empty($settings['logo']))
         <div class="mb-2">
