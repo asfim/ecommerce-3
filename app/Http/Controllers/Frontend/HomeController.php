@@ -92,6 +92,7 @@ class HomeController extends Controller
             ->get();
 
         $bestSellingProducts = Product::frontendActive()
+            ->with('category')
             ->withAvg('reviews', 'rating')
             ->withCount('reviews')
             ->latest()

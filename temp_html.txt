@@ -1,0 +1,2176 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rongdhonu Fashion - Bangladesh Clothing Store</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+
+        :root{
+            --primary:#14213d;
+            --orange:#ff6b35;
+            --pink:#e83e8c;
+            --purple:#6f42c1;
+            --gold:#f4b942;
+            --green:#16a085;
+            --cream:#fff8f0;
+            --light:#f8f9fa;
+            --dark:#111827;
+            --muted:#6b7280;
+        }
+
+        *{
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            margin:0;
+            color:var(--dark);
+            background:#fff;
+        }
+
+        a{
+            text-decoration:none;
+        }
+
+        img{
+            max-width:100%;
+        }
+
+        /* ======================
+           TOP BAR
+        ====================== */
+
+        .top-bar{
+            background:linear-gradient(
+                90deg,
+                #14213d,
+                #6f42c1,
+                #e83e8c
+            );
+            color:#fff;
+            padding:9px 0;
+            font-size:13px;
+        }
+
+        .top-bar strong{
+            color:#ffd166;
+        }
+
+        /* ======================
+           HEADER
+        ====================== */
+
+        .main-header{
+            background:#fff;
+            border-bottom:1px solid #eee;
+            padding:18px 0;
+        }
+
+        .brand{
+            font-size:28px;
+            font-weight:800;
+            color:#14213d;
+            line-height:1;
+        }
+
+        .brand span{
+            color:#ff6b35;
+        }
+
+        .brand small{
+            display:block;
+            font-size:9px;
+            letter-spacing:3px;
+            color:#777;
+            margin-top:6px;
+        }
+
+        .search-wrapper{
+            position:relative;
+        }
+
+        .search-wrapper input{
+            width:100%;
+            height:50px;
+            border:2px solid #f0f0f0;
+            background:#fafafa;
+            border-radius:50px;
+            padding:0 60px 0 20px;
+            outline:none;
+            transition:.3s;
+        }
+
+        .search-wrapper input:focus{
+            border-color:#ff6b35;
+            background:#fff;
+        }
+
+        .search-wrapper button{
+            position:absolute;
+            right:5px;
+            top:5px;
+            width:40px;
+            height:40px;
+            border:none;
+            border-radius:50%;
+            color:#fff;
+            background:linear-gradient(
+                135deg,
+                #ff6b35,
+                #e83e8c
+            );
+        }
+
+        .head-icon{
+            width:44px;
+            height:44px;
+            border-radius:15px;
+            background:#f7f7f7;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#14213d;
+            font-size:20px;
+            position:relative;
+            transition:.3s;
+        }
+
+        .head-icon:hover{
+            background:#14213d;
+            color:#fff;
+            transform:translateY(-2px);
+        }
+
+        .counter{
+            position:absolute;
+            right:-4px;
+            top:-5px;
+            min-width:18px;
+            height:18px;
+            border-radius:20px;
+            background:#ff6b35;
+            color:#fff;
+            font-size:10px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:0 4px;
+        }
+
+        /* ======================
+           NAVIGATION
+        ====================== */
+
+        .main-nav{
+            background:#fff;
+            box-shadow:0 3px 15px rgba(0,0,0,.04);
+            position:relative;
+            z-index:10;
+        }
+
+        .main-nav .nav-link{
+            color:#222;
+            font-size:13px;
+            font-weight:700;
+            padding:18px 16px !important;
+            text-transform:uppercase;
+        }
+
+        .main-nav .nav-link:hover{
+            color:#ff6b35;
+        }
+
+        .sale-menu{
+            color:#e63946 !important;
+        }
+
+        /* ======================
+           HERO
+        ====================== */
+
+        .hero{
+            background:
+            linear-gradient(
+                100deg,
+                rgba(20,33,61,.95) 0%,
+                rgba(111,66,193,.80) 47%,
+                rgba(232,62,140,.35) 100%
+            ),
+            url('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1800&q=90');
+
+            background-size:cover;
+            background-position:center;
+            min-height:580px;
+            display:flex;
+            align-items:center;
+            position:relative;
+            overflow:hidden;
+        }
+
+        .hero:before{
+            content:"";
+            width:300px;
+            height:300px;
+            position:absolute;
+            border-radius:50%;
+            background:#ff6b35;
+            opacity:.17;
+            top:-100px;
+            right:25%;
+        }
+
+        .hero:after{
+            content:"";
+            width:200px;
+            height:200px;
+            position:absolute;
+            border-radius:50%;
+            background:#ffd166;
+            opacity:.17;
+            bottom:-70px;
+            right:5%;
+        }
+
+        .hero-content{
+            color:#fff;
+            max-width:650px;
+            position:relative;
+            z-index:2;
+        }
+
+        .hero-badge{
+            display:inline-block;
+            background:rgba(255,255,255,.14);
+            border:1px solid rgba(255,255,255,.2);
+            backdrop-filter:blur(8px);
+            padding:8px 18px;
+            border-radius:30px;
+            font-size:12px;
+            font-weight:700;
+            letter-spacing:2px;
+            margin-bottom:20px;
+        }
+
+        .hero h1{
+            font-size:66px;
+            font-weight:800;
+            line-height:1.05;
+            margin-bottom:20px;
+        }
+
+        .hero h1 span{
+            color:#ffd166;
+        }
+
+        .hero p{
+            font-size:17px;
+            color:#eee;
+            line-height:1.8;
+            max-width:550px;
+        }
+
+        .hero-btn{
+            border:none;
+            padding:15px 30px;
+            border-radius:12px;
+            font-weight:700;
+            transition:.3s;
+        }
+
+        .hero-btn-primary{
+            background:linear-gradient(
+                135deg,
+                #ff6b35,
+                #ff3d77
+            );
+            color:#fff;
+        }
+
+        .hero-btn-primary:hover{
+            color:#fff;
+            transform:translateY(-3px);
+        }
+
+        .hero-btn-light{
+            background:#fff;
+            color:#14213d;
+        }
+
+        /* ======================
+           FEATURES
+        ====================== */
+
+        .features-area{
+            margin-top:-45px;
+            position:relative;
+            z-index:5;
+        }
+
+        .feature-card{
+            background:#fff;
+            border-radius:20px;
+            padding:25px;
+            display:flex;
+            align-items:center;
+            gap:15px;
+            box-shadow:0 10px 40px rgba(0,0,0,.08);
+            height:100%;
+        }
+
+        .feature-icon{
+            min-width:55px;
+            height:55px;
+            border-radius:17px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:25px;
+            color:#fff;
+        }
+
+        .icon-orange{
+            background:linear-gradient(135deg,#ff6b35,#ff8c42);
+        }
+
+        .icon-purple{
+            background:linear-gradient(135deg,#6f42c1,#9b5de5);
+        }
+
+        .icon-pink{
+            background:linear-gradient(135deg,#e83e8c,#ff5d8f);
+        }
+
+        .icon-green{
+            background:linear-gradient(135deg,#16a085,#2ecc71);
+        }
+
+        .feature-card h6{
+            margin:0 0 5px;
+            font-weight:700;
+        }
+
+        .feature-card p{
+            margin:0;
+            font-size:12px;
+            color:#777;
+        }
+
+        /* ======================
+           SECTION
+        ====================== */
+
+        .section-padding{
+            padding:85px 0;
+        }
+
+        .section-head{
+            margin-bottom:45px;
+        }
+
+        .section-head span{
+            color:#ff6b35;
+            text-transform:uppercase;
+            font-size:12px;
+            font-weight:800;
+            letter-spacing:2px;
+        }
+
+        .section-head h2{
+            font-size:38px;
+            font-weight:800;
+            margin-top:7px;
+        }
+
+        /* ======================
+           CATEGORY
+        ====================== */
+
+        .category-card{
+            border-radius:24px;
+            overflow:hidden;
+            position:relative;
+            height:370px;
+            box-shadow:0 10px 30px rgba(0,0,0,.08);
+        }
+
+        .category-card img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            transition:.6s;
+        }
+
+        .category-card:hover img{
+            transform:scale(1.08);
+        }
+
+        .category-overlay{
+            position:absolute;
+            inset:0;
+            background:linear-gradient(
+                transparent 25%,
+                rgba(0,0,0,.75)
+            );
+        }
+
+        .category-content{
+            position:absolute;
+            left:25px;
+            right:25px;
+            bottom:25px;
+            color:#fff;
+        }
+
+        .category-content h3{
+            font-weight:800;
+            font-size:25px;
+        }
+
+        .category-content p{
+            font-size:12px;
+            color:#eee;
+        }
+
+        .category-btn{
+            display:inline-block;
+            color:#fff;
+            font-weight:700;
+            font-size:12px;
+            border-bottom:2px solid #ffd166;
+            padding-bottom:4px;
+        }
+
+        /* ======================
+           FLASH SALE
+        ====================== */
+
+        .flash-sale{
+            background:
+            linear-gradient(
+                135deg,
+                #14213d,
+                #5f2c82,
+                #e83e8c
+            );
+            padding:70px 0;
+            color:#fff;
+            position:relative;
+            overflow:hidden;
+        }
+
+        .flash-sale:after{
+            content:"SALE";
+            position:absolute;
+            right:-20px;
+            bottom:-50px;
+            font-size:180px;
+            font-weight:900;
+            opacity:.04;
+        }
+
+        .flash-sale h2{
+            font-size:45px;
+            font-weight:800;
+        }
+
+        .flash-sale h2 span{
+            color:#ffd166;
+        }
+
+        .countdown{
+            display:flex;
+            gap:10px;
+            margin-top:25px;
+        }
+
+        .time-box{
+            background:rgba(255,255,255,.12);
+            border:1px solid rgba(255,255,255,.15);
+            backdrop-filter:blur(8px);
+            width:75px;
+            height:75px;
+            border-radius:15px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+        }
+
+        .time-box strong{
+            font-size:22px;
+        }
+
+        .time-box span{
+            font-size:10px;
+        }
+
+        /* ======================
+           PRODUCTS
+        ====================== */
+
+        .product-card{
+            background:#fff;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 5px 25px rgba(0,0,0,.06);
+            transition:.35s;
+            height:100%;
+        }
+
+        .product-card:hover{
+            transform:translateY(-8px);
+            box-shadow:0 18px 40px rgba(0,0,0,.12);
+        }
+
+        .product-img{
+            position:relative;
+            overflow:hidden;
+            background:#f5f5f5;
+        }
+
+        .product-img img{
+            width:100%;
+            height:340px;
+            object-fit:cover;
+            transition:.5s;
+        }
+
+        .product-card:hover .product-img img{
+            transform:scale(1.05);
+        }
+
+        .badge-product{
+            position:absolute;
+            top:15px;
+            left:15px;
+            padding:7px 12px;
+            border-radius:30px;
+            color:#fff;
+            font-size:10px;
+            font-weight:700;
+        }
+
+        .badge-new{
+            background:#16a085;
+        }
+
+        .badge-sale{
+            background:#e63946;
+        }
+
+        .badge-hot{
+            background:#ff6b35;
+        }
+
+        .wishlist{
+            position:absolute;
+            right:15px;
+            top:15px;
+            width:40px;
+            height:40px;
+            border:none;
+            border-radius:50%;
+            background:#fff;
+            box-shadow:0 4px 15px rgba(0,0,0,.12);
+        }
+
+        .wishlist:hover{
+            background:#e83e8c;
+            color:#fff;
+        }
+
+        .product-info{
+            padding:20px;
+        }
+
+        .product-category{
+            font-size:11px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            color:#999;
+        }
+
+        .product-title{
+            font-size:15px;
+            font-weight:700;
+            color:#222;
+            margin:7px 0;
+        }
+
+        .rating{
+            color:#f4b942;
+            font-size:12px;
+        }
+
+        .review-count{
+            color:#999;
+            font-size:11px;
+        }
+
+        .price{
+            font-weight:800;
+            color:#14213d;
+            font-size:18px;
+        }
+
+        .old-price{
+            color:#aaa;
+            text-decoration:line-through;
+            margin-left:7px;
+            font-weight:400;
+            font-size:13px;
+        }
+
+        .add-cart{
+            border:none;
+            background:#f4f4f4;
+            width:42px;
+            height:42px;
+            border-radius:12px;
+            color:#14213d;
+            transition:.3s;
+        }
+
+        .add-cart:hover{
+            background:linear-gradient(135deg,#ff6b35,#e83e8c);
+            color:#fff;
+        }
+
+        /* ======================
+           OFFER BANNERS
+        ====================== */
+
+        .offer-card{
+            border-radius:25px;
+            padding:45px;
+            min-height:300px;
+            display:flex;
+            align-items:center;
+            position:relative;
+            overflow:hidden;
+            color:#fff;
+        }
+
+        .offer-men{
+            background:
+            linear-gradient(
+                90deg,
+                rgba(20,33,61,.93),
+                rgba(20,33,61,.35)
+            ),
+            url('https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=1000&q=85')
+            center/cover;
+        }
+
+        .offer-women{
+            background:
+            linear-gradient(
+                90deg,
+                rgba(232,62,140,.9),
+                rgba(232,62,140,.25)
+            ),
+            url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=85')
+            center/cover;
+        }
+
+        .offer-card h3{
+            font-size:34px;
+            font-weight:800;
+        }
+
+        .offer-card p{
+            max-width:300px;
+            font-size:13px;
+        }
+
+        /* ======================
+           PAYMENT
+        ====================== */
+
+        .payment-section{
+            background:#fff8f0;
+            padding:55px 0;
+        }
+
+        .payment-box{
+            background:#fff;
+            border-radius:20px;
+            padding:25px;
+            text-align:center;
+            border:1px solid #f3e9df;
+            height:100%;
+        }
+
+        .payment-box i{
+            font-size:35px;
+            color:#ff6b35;
+        }
+
+        /* ======================
+           NEWSLETTER
+        ====================== */
+
+        .newsletter{
+            background:
+            linear-gradient(
+                135deg,
+                #ff6b35,
+                #e83e8c,
+                #6f42c1
+            );
+            border-radius:30px;
+            padding:55px;
+            color:#fff;
+        }
+
+        .newsletter h2{
+            font-size:36px;
+            font-weight:800;
+        }
+
+        .subscribe{
+            background:#fff;
+            padding:7px;
+            border-radius:15px;
+            display:flex;
+        }
+
+        .subscribe input{
+            flex:1;
+            border:none;
+            outline:none;
+            padding:0 15px;
+        }
+
+        .subscribe button{
+            border:none;
+            background:#14213d;
+            color:#fff;
+            padding:13px 25px;
+            border-radius:10px;
+            font-weight:700;
+        }
+
+        /* ======================
+           FOOTER
+        ====================== */
+
+        footer{
+            background:#111827;
+            color:#9ca3af;
+            padding:75px 0 25px;
+        }
+
+        footer .brand{
+            color:#fff;
+        }
+
+        footer h5{
+            color:#fff;
+            font-size:16px;
+            font-weight:700;
+            margin-bottom:20px;
+        }
+
+        footer ul{
+            list-style:none;
+            padding:0;
+        }
+
+        footer ul li{
+            margin-bottom:10px;
+        }
+
+        footer ul a{
+            color:#9ca3af;
+            font-size:13px;
+        }
+
+        footer ul a:hover{
+            color:#ff6b35;
+        }
+
+        .social a{
+            width:40px;
+            height:40px;
+            border-radius:12px;
+            background:#1f2937;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            color:#fff;
+            margin-right:6px;
+        }
+
+        .social a:hover{
+            background:#ff6b35;
+        }
+
+        .footer-bottom{
+            border-top:1px solid #283142;
+            padding-top:22px;
+            margin-top:45px;
+            font-size:12px;
+        }
+
+        /* ======================
+           MOBILE BOTTOM NAV
+        ====================== */
+
+        .mobile-bottom{
+            display:none;
+        }
+
+        @media(max-width:991px){
+
+            .hero{
+                min-height:500px;
+            }
+
+            .hero h1{
+                font-size:48px;
+            }
+
+            .features-area{
+                margin-top:25px;
+            }
+
+            .section-padding{
+                padding:65px 0;
+            }
+        }
+
+        @media(max-width:767px){
+
+            body{
+                padding-bottom:70px;
+            }
+
+            .hero{
+                min-height:470px;
+            }
+
+            .hero h1{
+                font-size:38px;
+            }
+
+            .hero p{
+                font-size:14px;
+            }
+
+            .hero-btn{
+                padding:13px 18px;
+                font-size:13px;
+            }
+
+            .section-head h2{
+                font-size:30px;
+            }
+
+            .category-card{
+                height:320px;
+            }
+
+            .product-img img{
+                height:260px;
+            }
+
+            .product-info{
+                padding:14px;
+            }
+
+            .flash-sale h2{
+                font-size:34px;
+            }
+
+            .newsletter{
+                padding:35px 20px;
+                border-radius:20px;
+            }
+
+            .subscribe{
+                display:block;
+                background:transparent;
+                padding:0;
+            }
+
+            .subscribe input{
+                width:100%;
+                height:50px;
+                border-radius:10px;
+                margin-bottom:10px;
+            }
+
+            .subscribe button{
+                width:100%;
+            }
+
+            .mobile-bottom{
+                display:flex;
+                position:fixed;
+                bottom:0;
+                left:0;
+                right:0;
+                height:65px;
+                background:#fff;
+                box-shadow:0 -5px 20px rgba(0,0,0,.1);
+                z-index:999;
+                justify-content:space-around;
+                align-items:center;
+            }
+
+            .mobile-bottom a{
+                color:#555;
+                font-size:10px;
+                text-align:center;
+            }
+
+            .mobile-bottom i{
+                display:block;
+                font-size:21px;
+                margin-bottom:2px;
+            }
+
+            .mobile-bottom .active{
+                color:#ff6b35;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="container">
+
+        <div class="d-flex justify-content-between">
+
+            <div>
+                ðŸ‡§ðŸ‡© à¦¸à¦¾à¦°à¦¾à¦¦à§‡à¦¶à§‡ à¦¡à§‡à¦²à¦¿à¦­à¦¾à¦°à¦¿
+                <strong>Cash on Delivery Available</strong>
+            </div>
+
+            <div class="d-none d-md-block">
+                Hotline: 01XXXXXXXXX
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- HEADER -->
+<header class="main-header">
+
+    <div class="container">
+
+        <div class="row align-items-center g-3">
+
+            <div class="col-6 col-lg-3">
+
+                <a href="#" class="brand">
+                    RONG<span>DHONU</span>
+                    <small>FASHION & LIFESTYLE</small>
+                </a>
+
+            </div>
+
+            <div class="col-lg-5 d-none d-lg-block">
+
+                <div class="search-wrapper">
+
+                    <input
+                        type="text"
+                        placeholder="Search Panjabi, Saree, T-Shirt, Kurti..."
+                    >
+
+                    <button>
+                        <i class="bi bi-search"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="col-6 col-lg-4">
+
+                <div class="d-flex justify-content-end gap-2">
+
+                    <a class="head-icon" href="#">
+                        <i class="bi bi-person"></i>
+                    </a>
+
+                    <a class="head-icon" href="#">
+                        <i class="bi bi-heart"></i>
+                        <span class="counter">3</span>
+                    </a>
+
+                    <a class="head-icon" href="#">
+                        <i class="bi bi-bag"></i>
+                        <span class="counter">2</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-12 d-lg-none">
+
+                <div class="search-wrapper">
+
+                    <input
+                        type="text"
+                        placeholder="Search products..."
+                    >
+
+                    <button>
+                        <i class="bi bi-search"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- NAVIGATION -->
+<nav class="navbar navbar-expand-lg main-nav">
+
+    <div class="container">
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu"
+        >
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav mx-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Men
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Women
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Panjabi
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Saree
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Three Piece
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Kids
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        New Arrival
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link sale-menu" href="#">
+                        ðŸ”¥ Sale
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                âœ¨ NEW COLLECTION 2026
+            </span>
+
+            <h1>
+                à¦¬à¦¾à¦‚à¦²à¦¾à¦¦à§‡à¦¶à§‡à¦°
+                <span>à¦°à¦™à§‡</span><br>
+                à¦†à¦ªà¦¨à¦¾à¦° Fashion
+            </h1>
+
+            <p>
+                Premium Panjabi, Saree, Three Piece, T-Shirt,
+                Shirt à¦à¦¬à¦‚ à¦¨à¦¤à§à¦¨ Fashion Collection à¦à¦–à¦¨ à¦à¦• à¦œà¦¾à§Ÿà¦—à¦¾à§Ÿà¥¤
+            </p>
+
+            <div class="mt-4">
+
+                <a href="#" class="btn hero-btn hero-btn-primary me-2">
+                    SHOP NOW
+                </a>
+
+                <a href="#" class="btn hero-btn hero-btn-light">
+                    NEW ARRIVAL
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+<section class="features-area">
+
+    <div class="container">
+
+        <div class="row g-3">
+
+            <div class="col-6 col-lg-3">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon icon-orange">
+                        <i class="bi bi-truck"></i>
+                    </div>
+
+                    <div>
+                        <h6>Fast Delivery</h6>
+                        <p>à¦¸à¦¾à¦°à¦¾à¦¦à§‡à¦¶à§‡ à¦¦à§à¦°à§à¦¤ à¦¡à§‡à¦²à¦¿à¦­à¦¾à¦°à¦¿</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon icon-purple">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+
+                    <div>
+                        <h6>Cash on Delivery</h6>
+                        <p>à¦ªà¦£à§à¦¯ à¦ªà§‡à§Ÿà§‡ à¦®à§‚à¦²à§à¦¯ à¦ªà¦°à¦¿à¦¶à§‹à¦§</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon icon-pink">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </div>
+
+                    <div>
+                        <h6>Easy Exchange</h6>
+                        <p>à¦¸à¦¹à¦œ Size Exchange</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon icon-green">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+
+                    <div>
+                        <h6>Secure Payment</h6>
+                        <p>bKash, Nagad & Card</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+<section class="section-padding">
+
+    <div class="container">
+
+        <div class="section-head text-center">
+
+            <span>Shop By Category</span>
+
+            <h2>
+                à¦†à¦ªà¦¨à¦¾à¦° à¦ªà¦›à¦¨à§à¦¦à§‡à¦° Collection
+            </h2>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="category-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=800&q=80"
+                        alt=""
+                    >
+
+                    <div class="category-overlay"></div>
+
+                    <div class="category-content">
+
+                        <h3>Panjabi</h3>
+
+                        <p>
+                            Premium festive collection
+                        </p>
+
+                        <a class="category-btn" href="#">
+                            SHOP NOW
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="category-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80"
+                        alt=""
+                    >
+
+                    <div class="category-overlay"></div>
+
+                    <div class="category-content">
+
+                        <h3>Saree</h3>
+
+                        <p>
+                            Elegant women's collection
+                        </p>
+
+                        <a class="category-btn" href="#">
+                            SHOP NOW
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="category-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80"
+                        alt=""
+                    >
+
+                    <div class="category-overlay"></div>
+
+                    <div class="category-content">
+
+                        <h3>Women</h3>
+
+                        <p>
+                            Kurti, Tops & Three Piece
+                        </p>
+
+                        <a class="category-btn" href="#">
+                            SHOP NOW
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="category-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=800&q=80"
+                        alt=""
+                    >
+
+                    <div class="category-overlay"></div>
+
+                    <div class="category-content">
+
+                        <h3>Men</h3>
+
+                        <p>
+                            T-Shirt, Shirt & Casual Wear
+                        </p>
+
+                        <a class="category-btn" href="#">
+                            SHOP NOW
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FLASH SALE -->
+<section class="flash-sale">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-7">
+
+                <small>
+                    LIMITED TIME OFFER
+                </small>
+
+                <h2>
+                    Flash Sale
+                    <span>Up To 50% OFF</span>
+                </h2>
+
+                <p>
+                    à¦†à¦ªà¦¨à¦¾à¦° à¦ªà¦›à¦¨à§à¦¦à§‡à¦° Fashion Product à¦à¦–à¦¨
+                    à¦¬à¦¿à¦¶à§‡à¦· Discount-à¦à¥¤
+                </p>
+
+
+                <div class="countdown">
+
+                    <div class="time-box">
+                        <strong>02</strong>
+                        <span>DAYS</span>
+                    </div>
+
+                    <div class="time-box">
+                        <strong>15</strong>
+                        <span>HOURS</span>
+                    </div>
+
+                    <div class="time-box">
+                        <strong>30</strong>
+                        <span>MINUTES</span>
+                    </div>
+
+                    <div class="time-box">
+                        <strong>45</strong>
+                        <span>SECONDS</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-5 text-lg-end mt-4 mt-lg-0">
+
+                <a href="#" class="btn hero-btn hero-btn-light">
+                    EXPLORE SALE
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section class="section-padding bg-light">
+
+    <div class="container">
+
+        <div class="section-head text-center">
+
+            <span>Popular Products</span>
+
+            <h2>
+                Best Selling Products
+            </h2>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- PRODUCT -->
+
+            <div class="col-6 col-lg-3">
+
+                <div class="product-card">
+
+                    <div class="product-img">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1610652492500-ded49ceeb378?auto=format&fit=crop&w=700&q=80"
+                            alt=""
+                        >
+
+                        <span class="badge-product badge-new">
+                            NEW
+                        </span>
+
+                        <button class="wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            Panjabi
+                        </div>
+
+                        <a href="#" class="product-title d-block">
+                            Premium Embroidery Panjabi
+                        </a>
+
+                        <div>
+                            <span class="rating">
+                                â˜…â˜…â˜…â˜…â˜…
+                            </span>
+
+                            <span class="review-count">
+                                (128)
+                            </span>
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+
+                            <div>
+                                <span class="price">
+                                    à§³1,850
+                                </span>
+
+                                <span class="old-price">
+                                    à§³2,200
+                                </span>
+                            </div>
+
+                            <button class="add-cart">
+                                <i class="bi bi-bag-plus"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT -->
+
+            <div class="col-6 col-lg-3">
+
+                <div class="product-card">
+
+                    <div class="product-img">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80"
+                            alt=""
+                        >
+
+                        <span class="badge-product badge-sale">
+                            -25%
+                        </span>
+
+                        <button class="wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            Saree
+                        </div>
+
+                        <a href="#" class="product-title d-block">
+                            Premium Traditional Saree
+                        </a>
+
+                        <div>
+                            <span class="rating">
+                                â˜…â˜…â˜…â˜…â˜…
+                            </span>
+
+                            <span class="review-count">
+                                (96)
+                            </span>
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+
+                            <div>
+                                <span class="price">
+                                    à§³2,450
+                                </span>
+
+                                <span class="old-price">
+                                    à§³3,250
+                                </span>
+                            </div>
+
+                            <button class="add-cart">
+                                <i class="bi bi-bag-plus"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT -->
+
+            <div class="col-6 col-lg-3">
+
+                <div class="product-card">
+
+                    <div class="product-img">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=700&q=80"
+                            alt=""
+                        >
+
+                        <span class="badge-product badge-hot">
+                            HOT
+                        </span>
+
+                        <button class="wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            T-Shirt
+                        </div>
+
+                        <a href="#" class="product-title d-block">
+                            Premium Cotton T-Shirt
+                        </a>
+
+                        <div>
+                            <span class="rating">
+                                â˜…â˜…â˜…â˜…â˜†
+                            </span>
+
+                            <span class="review-count">
+                                (78)
+                            </span>
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+
+                            <div>
+                                <span class="price">
+                                    à§³950
+                                </span>
+                            </div>
+
+                            <button class="add-cart">
+                                <i class="bi bi-bag-plus"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT -->
+
+            <div class="col-6 col-lg-3">
+
+                <div class="product-card">
+
+                    <div class="product-img">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=700&q=80"
+                            alt=""
+                        >
+
+                        <span class="badge-product badge-new">
+                            NEW
+                        </span>
+
+                        <button class="wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <div class="product-category">
+                            Shirt
+                        </div>
+
+                        <a href="#" class="product-title d-block">
+                            Premium Formal Shirt
+                        </a>
+
+                        <div>
+                            <span class="rating">
+                                â˜…â˜…â˜…â˜…â˜…
+                            </span>
+
+                            <span class="review-count">
+                                (110)
+                            </span>
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+
+                            <div>
+                                <span class="price">
+                                    à§³1,350
+                                </span>
+                            </div>
+
+                            <button class="add-cart">
+                                <i class="bi bi-bag-plus"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="text-center mt-5">
+
+            <a
+                href="#"
+                class="btn hero-btn hero-btn-primary px-5"
+            >
+                VIEW ALL PRODUCTS
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MEN WOMEN OFFER -->
+<section class="section-padding">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-lg-6">
+
+                <div class="offer-card offer-men">
+
+                    <div>
+
+                        <small>
+                            MEN COLLECTION
+                        </small>
+
+                        <h3>
+                            Modern Style<br>
+                            For Men
+                        </h3>
+
+                        <p>
+                            Shirt, Panjabi, T-Shirt,
+                            Jeans à¦à¦¬à¦‚ à¦†à¦°à¦“ à¦…à¦¨à§‡à¦• à¦•à¦¿à¦›à§à¥¤
+                        </p>
+
+                        <a href="#" class="btn hero-btn hero-btn-light">
+                            SHOP MEN
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="offer-card offer-women">
+
+                    <div>
+
+                        <small>
+                            WOMEN COLLECTION
+                        </small>
+
+                        <h3>
+                            Elegant Style<br>
+                            For Women
+                        </h3>
+
+                        <p>
+                            Saree, Kurti, Three Piece,
+                            Tops à¦à¦¬à¦‚ premium collectionà¥¤
+                        </p>
+
+                        <a href="#" class="btn hero-btn hero-btn-light">
+                            SHOP WOMEN
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PAYMENT -->
+<section class="payment-section">
+
+    <div class="container">
+
+        <div class="section-head text-center">
+
+            <span>Easy Shopping</span>
+
+            <h2>
+                Payment & Delivery
+            </h2>
+
+        </div>
+
+        <div class="row g-3">
+
+            <div class="col-6 col-lg-3">
+
+                <div class="payment-box">
+
+                    <i class="bi bi-wallet2"></i>
+
+                    <h6 class="mt-3">
+                        bKash
+                    </h6>
+
+                    <small>
+                        à¦¸à¦¹à¦œ bKash Payment
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div class="col-6 col-lg-3">
+
+                <div class="payment-box">
+
+                    <i class="bi bi-phone"></i>
+
+                    <h6 class="mt-3">
+                        Nagad
+                    </h6>
+
+                    <small>
+                        Nagad Payment Available
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div class="col-6 col-lg-3">
+
+                <div class="payment-box">
+
+                    <i class="bi bi-cash-coin"></i>
+
+                    <h6 class="mt-3">
+                        Cash On Delivery
+                    </h6>
+
+                    <small>
+                        à¦ªà¦£à§à¦¯ à¦¹à¦¾à¦¤à§‡ à¦ªà§‡à§Ÿà§‡ à¦®à§‚à¦²à§à¦¯ à¦¦à¦¿à¦¨
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div class="col-6 col-lg-3">
+
+                <div class="payment-box">
+
+                    <i class="bi bi-credit-card"></i>
+
+                    <h6 class="mt-3">
+                        Card Payment
+                    </h6>
+
+                    <small>
+                        Visa & Mastercard
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NEWSLETTER -->
+<section class="section-padding">
+
+    <div class="container">
+
+        <div class="newsletter">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-6">
+
+                    <h2>
+                        Get Fashion Updates
+                    </h2>
+
+                    <p class="mb-lg-0">
+                        à¦¨à¦¤à§à¦¨ Collection, Discount à¦“ Special Offer
+                        à¦¸à¦¬à¦¾à¦° à¦†à¦—à§‡ à¦œà¦¾à¦¨à¦¤à§‡ Subscribe à¦•à¦°à§à¦¨à¥¤
+                    </p>
+
+                </div>
+
+                <div class="col-lg-6 mt-4 mt-lg-0">
+
+                    <div class="subscribe">
+
+                        <input
+                            type="email"
+                            placeholder="Enter your email address"
+                        >
+
+                        <button>
+                            Subscribe
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+
+                <a href="#" class="brand">
+                    RONG<span>DHONU</span>
+                </a>
+
+                <p class="mt-4">
+                    Modern Bangladeshi fashion brand.
+                    Premium clothing collection for men,
+                    women and kids.
+                </p>
+
+                <div class="social mt-4">
+
+                    <a href="#">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-2">
+
+                <h5>Shop</h5>
+
+                <ul>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Panjabi</a></li>
+                    <li><a href="#">Saree</a></li>
+                    <li><a href="#">New Arrival</a></li>
+                </ul>
+
+            </div>
+
+
+            <div class="col-6 col-lg-2">
+
+                <h5>Customer</h5>
+
+                <ul>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Exchange Policy</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <h5>Contact</h5>
+
+                <ul>
+
+                    <li>
+                        <i class="bi bi-geo-alt me-2"></i>
+                        Dhaka, Bangladesh
+                    </li>
+
+                    <li>
+                        <i class="bi bi-telephone me-2"></i>
+                        01XXXXXXXXX
+                    </li>
+
+                    <li>
+                        <i class="bi bi-envelope me-2"></i>
+                        support@rongdhonu.com
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="d-md-flex justify-content-between">
+
+                <span>
+                    Â© 2026 Rongdhonu Fashion.
+                    All Rights Reserved.
+                </span>
+
+                <span>
+                    Privacy Policy | Terms & Conditions
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- MOBILE BOTTOM MENU -->
+<div class="mobile-bottom">
+
+    <a href="#" class="active">
+        <i class="bi bi-house"></i>
+        Home
+    </a>
+
+    <a href="#">
+        <i class="bi bi-grid"></i>
+        Category
+    </a>
+
+    <a href="#">
+        <i class="bi bi-search"></i>
+        Search
+    </a>
+
+    <a href="#">
+        <i class="bi bi-heart"></i>
+        Wishlist
+    </a>
+
+    <a href="#">
+        <i class="bi bi-bag"></i>
+        Cart
+    </a>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const hero = document.querySelector('.hero');
+    const images = [
+        "url('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1800&q=90')",
+        "url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1800&q=90')",
+        "url('https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=1800&q=90')"
+    ];
+    let currentIndex = 0;
+    
+    hero.style.transition = "background-image 1s ease-in-out";
+    
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % images.length;
+        hero.style.backgroundImage = `linear-gradient(100deg, rgba(20,33,61,.95) 0%, rgba(111,66,193,.80) 47%, rgba(232,62,140,.35) 100%), `;
+    }, 3000);
+</script>
+
+</body>
+</html>

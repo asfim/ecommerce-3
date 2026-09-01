@@ -57,7 +57,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>
                             @if ($category->image)
-                                <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
+                                <img src="{{ asset('storage/' . str_replace('\\', '/', $category->image)) }}" alt="{{ $category->name }}"
                                     class="rounded" style="width:50px; height:50px; object-fit:cover;">
                             @else
                                 <span class="text-muted">—</span>

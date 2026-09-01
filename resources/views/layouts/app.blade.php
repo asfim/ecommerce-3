@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/rongdhonu.css') }}?v={{ time() }}">
     @stack('styles')
 </head>
 <body>
