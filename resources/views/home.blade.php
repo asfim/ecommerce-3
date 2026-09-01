@@ -165,12 +165,94 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 text-lg-end mt-4 mt-lg-0">
+            <div class="col-lg-5 text-lg-end mt-4 mt-lg-0 d-flex flex-column align-items-lg-end">
                 <a href="{{ route('flash-sale') }}" class="btn hero-btn hero-btn-light">
                     EXPLORE SALE
                 </a>
             </div>
         </div>
+
+        <div class="position-relative mt-5">
+            <button class="btn btn-light rounded-circle fs-prev position-absolute top-50 start-0 translate-middle-y shadow-sm" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; z-index:5; left:-20px !important;"><i class="bi bi-arrow-left"></i></button>
+            <button class="btn btn-light rounded-circle fs-next position-absolute top-50 end-0 translate-middle-y shadow-sm" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; z-index:5; right:-20px !important;"><i class="bi bi-arrow-right"></i></button>
+
+            <div class="d-flex overflow-auto gap-4 pb-3 flash-sale-slider" style="scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none;">
+            @foreach($discountedProducts as $product)
+                @php
+                    $displayImage = $product->image;
+                    if(empty($displayImage)) {
+                        if(!empty($product->variants) && is_array($product->variants)) {
+                            foreach($product->variants as $v) {
+                                if(!empty($v['image'])) {
+                                    $displayImage = $v['image'];
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    $isNew = $product->created_at && $product->created_at->diffInDays(now()) < 30;
+                    $hasDiscount = $product->has_active_discount;
+                    $discountedPrice = $product->price;
+                    if ($hasDiscount) {
+                        if ($product->discount_type === 'percent') {
+                            $discountedPrice = $product->price - ($product->price * $product->discount_value) / 100;
+                        } else {
+                            $discountedPrice = $product->price - $product->discount_value;
+                        }
+                    }
+                @endphp
+                <div class="flex-shrink-0" style="width: 280px; scroll-snap-align: start;">
+                    <div class="product-card flash-glass-card">
+                        <div class="product-img">
+                            <a href="{{ route('product.details', $product->slug) }}">
+                                @if($displayImage)
+                                    <img src="{{ asset('storage/' . $displayImage) }}" alt="{{ $product->name }}">
+                                @else
+                                    <img src="https://images.unsplash.com/photo-1610652492500-ded49ceeb378?auto=format&fit=crop&w=700&q=80" alt="{{ $product->name }}">
+                                @endif
+                            </a>
+                            
+                            @if($hasDiscount && $product->discount_type === 'percent')
+                                <span class="badge-product badge-sale">-{{ round($product->discount_value) }}%</span>
+                            @elseif($isNew)
+                                <span class="badge-product badge-new">NEW</span>
+                            @endif
+
+                            <button class="wishlist">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">
+                                {{ $product->category->name ?? 'Category' }}
+                            </div>
+                            <a href="{{ route('product.details', $product->slug) }}" class="product-title d-block" style="text-decoration:none;">
+                                {{ Str::limit($product->name, 25) }}
+                            </a>
+                            <div>
+                                <span class="rating">★★★★★</span>
+                                <span class="review-count">(10)</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div>
+                                    <span class="price">৳{{ number_format($discountedPrice) }}</span>
+                                    @if($hasDiscount)
+                                        <span class="old-price">৳{{ number_format($product->price) }}</span>
+                                    @endif
+                                </div>
+                                <button class="add-cart add-to-cart-btn" data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $discountedPrice }}" data-image="{{ $displayImage ? asset('storage/'.$displayImage) : '' }}" data-original-price="{{ $product->price }}">
+                                    <i class="bi bi-bag-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+            </div>
+        </div>
+        <style>
+            .flash-sale-slider::-webkit-scrollbar { display: none; }
+        </style>
     </div>
 </section>
 
@@ -290,45 +372,7 @@
     </div>
 </section>
 
-<!-- PAYMENT -->
-<section class="payment-section">
-    <div class="container">
-        <div class="section-head text-center">
-            <span>Easy Shopping</span>
-            <h2>Payment & Delivery</h2>
-        </div>
-        <div class="row g-3">
-            <div class="col-6 col-lg-3">
-                <div class="payment-box">
-                    <i class="bi bi-wallet2"></i>
-                    <h6 class="mt-3">bKash</h6>
-                    <small>সহজ bKash Payment</small>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="payment-box">
-                    <i class="bi bi-phone"></i>
-                    <h6 class="mt-3">Nagad</h6>
-                    <small>Nagad Payment Available</small>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="payment-box">
-                    <i class="bi bi-cash-coin"></i>
-                    <h6 class="mt-3">Cash On Delivery</h6>
-                    <small>পণ্য হাতে পেয়ে মূল্য দিন</small>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="payment-box">
-                    <i class="bi bi-credit-card"></i>
-                    <h6 class="mt-3">Card Payment</h6>
-                    <small>Visa & Mastercard</small>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- NEWSLETTER -->
 <section class="section-padding">
@@ -415,6 +459,20 @@
         });
         catNext.addEventListener('click', () => {
             catSlider.scrollBy({ left: 300, behavior: 'smooth' });
+        });
+    }
+
+    // Flash Sale Slider Navigation
+    const fsSlider = document.querySelector('.flash-sale-slider');
+    const fsPrev = document.querySelector('.fs-prev');
+    const fsNext = document.querySelector('.fs-next');
+
+    if (fsSlider && fsPrev && fsNext) {
+        fsPrev.addEventListener('click', () => {
+            fsSlider.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+        fsNext.addEventListener('click', () => {
+            fsSlider.scrollBy({ left: 300, behavior: 'smooth' });
         });
     }
 </script>

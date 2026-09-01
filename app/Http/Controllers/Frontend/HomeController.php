@@ -99,6 +99,7 @@ class HomeController extends Controller
             ->take(10)
             ->get();
         $discountedProducts = Product::frontendActive()
+            ->with('category')
             ->where(function ($q) {
                 $q->where(function($sq) {
                     $sq->whereNotNull('discount_type')
@@ -121,7 +122,7 @@ class HomeController extends Controller
             ->latest()
             ->get()
             ->filter(function($p) { return $p->has_any_discount; })
-            ->take(5);
+            ->take(12);
         $newArrivalProducts = Product::frontendActive()
             ->where('is_new_arrival', true)
             ->withAvg('reviews', 'rating')
