@@ -25,7 +25,7 @@
 <header class="main-header">
     <div class="container">
         <div class="row align-items-center g-3">
-            <div class="col-6 col-lg-3">
+            <div class="col-6 col-lg-2">
                 <a href="{{ route('home') }}" class="brand" style="text-decoration:none;">
                     @if($companyLogo)
                         <img src="{{ asset('storage/' . $companyLogo) }}" alt="{{ $companyName }}" style="max-height: 55px; border-radius: 6px;">
@@ -35,16 +35,40 @@
                     @endif
                 </a>
             </div>
+
+            <!-- DESKTOP MENU -->
             <div class="col-lg-5 d-none d-lg-block">
-                <form action="{{ route('home') }}" method="GET" class="search-wrapper">
-                    <input type="text" name="search" placeholder="Search Panjabi, Saree, T-Shirt, Kurti..." value="{{ request()->query('search') }}" class="search-input-field" autocomplete="off">
+                <ul class="navbar-nav flex-row justify-content-center gap-4 fw-semibold" style="font-size: 15px; margin: 0; padding: 0;">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark {{ request()->routeIs('shop') ? 'active' : '' }}" href="{{ route('shop') }}">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger {{ request()->routeIs('flash-sale') ? 'active' : '' }}" href="{{ route('flash-sale') }}">🔥 Sale</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark {{ request()->routeIs('blogs.*') ? 'active' : '' }}" href="{{ route('blogs.index') }}">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- SEARCH -->
+            <div class="col-lg-3 d-none d-lg-block">
+                <form action="{{ route('home') }}" method="GET" class="search-wrapper m-0">
+                    <input type="text" name="search" placeholder="Search..." value="{{ request()->query('search') }}" class="search-input-field" autocomplete="off" style="padding-left:15px;">
                     <button type="submit">
                         <i class="bi bi-search"></i>
                     </button>
                     <div class="search-results-dropdown d-none position-absolute w-100 bg-white border rounded shadow mt-1 p-2" style="z-index: 1050; top: 100%; left: 0; max-height: 350px; overflow-y: auto;"></div>
                 </form>
             </div>
-            <div class="col-6 col-lg-4">
+            <!-- ICONS & MOBILE TOGGLE -->
+            <div class="col-6 col-lg-2">
                 <div class="d-flex justify-content-end gap-2 align-items-center">
                     
                     @if (auth()->guard('admin')->check())
@@ -97,9 +121,15 @@
                             <!-- Dynamically rendered cart items -->
                         </ul>
                     </div>
+                    
+                    <!-- MOBILE MENU TOGGLER -->
+                    <button class="navbar-toggler d-lg-none border-0 bg-transparent ms-1 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
+                        <i class="bi bi-list fs-2 text-dark"></i>
+                    </button>
                 </div>
             </div>
 
+            <!-- MOBILE SEARCH -->
             <div class="col-12 d-lg-none">
                 <form action="{{ route('home') }}" method="GET" class="search-wrapper">
                     <input type="text" name="search" placeholder="Search products..." value="{{ request()->query('search') }}" class="search-input-field" autocomplete="off">
@@ -110,18 +140,10 @@
                 </form>
             </div>
         </div>
-    </div>
-</header>
 
-<!-- NAVIGATION -->
-<nav class="navbar navbar-expand-lg main-nav">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" style="border:none; padding:10px;">
-            <i class="bi bi-list" style="font-size: 24px;"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="menu">
-            <ul class="navbar-nav mx-auto">
+        <!-- MOBILE MENU COLLAPSE -->
+        <div class="collapse d-lg-none" id="mobileMenu">
+            <ul class="navbar-nav pb-3 pt-2">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
                 </li>
@@ -129,7 +151,7 @@
                     <a class="nav-link {{ request()->routeIs('shop') ? 'active' : '' }}" href="{{ route('shop') }}">Shop</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('flash-sale') ? 'active' : '' }} sale-menu" href="{{ route('flash-sale') }}">🔥 Sale ({{ $maxDiscountPercent }}% OFF)</a>
+                    <a class="nav-link text-danger {{ request()->routeIs('flash-sale') ? 'active' : '' }}" href="{{ route('flash-sale') }}">🔥 Sale ({{ $maxDiscountPercent }}% OFF)</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}" href="{{ route('blogs.index') }}">Blog</a>
@@ -140,7 +162,10 @@
             </ul>
         </div>
     </div>
-</nav>
+</header>
+
+<style>
+    .main-header { padding: 15px 0; }
 
 <style>
     .search-results-dropdown { border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border: 1px solid rgba(0, 0, 0, 0.08); }
