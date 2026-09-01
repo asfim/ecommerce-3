@@ -327,7 +327,7 @@ class HomeController extends Controller
         return view('frontend.contact', compact('companySettings'));
     }
 
-    public function shop(): View
+    public function shop(): \Illuminate\View\View|\Illuminate\Http\JsonResponse
     {
         $query = Product::frontendActive()
             ->withAvg('reviews', 'rating')
@@ -362,18 +362,30 @@ class HomeController extends Controller
         $sort = request()->query('sort');
         if ($sort === 'best_selling') {
             $query->orderBy('sales_count', 'desc');
-            $products = $query->take(12)->get();
         } elseif ($sort === 'price_low') {
             $query->orderBy('price', 'asc');
-            $products = $query->paginate(12)->appends(request()->query());
         } elseif ($sort === 'price_high') {
             $query->orderBy('price', 'desc');
-            $products = $query->paginate(12)->appends(request()->query());
         } else {
             // Newest by default
             $query->latest();
-            $products = $query->paginate(12)->appends(request()->query());
         }
+
+        $page = (int) request()->get('page', 1);
+        $perPageInitial = 12;
+        $perPageLoadMore = 4;
+        
+        if ($page == 1) {
+            $limit = $perPageInitial;
+            $offset = 0;
+        } else {
+            $limit = $perPageLoadMore;
+            $offset = $perPageInitial + ($page - 2) * $perPageLoadMore;
+        }
+
+        $total = $query->count();
+        $products = $query->offset($offset)->limit($limit)->get();
+        $hasMore = ($offset + $limit) < $total;
 
         $categories = \App\Models\Category::where('is_active', true)->get();
         $brands = \App\Models\Brand::where('is_active', true)->get();
@@ -382,7 +394,18 @@ class HomeController extends Controller
             return view('bestsell', compact('products'));
         }
 
-        return view('shop', compact('products', 'categories', 'brands'));
+        if (request()->ajax()) {
+            $html = '';
+            foreach($products as $product) {
+                $html .= view('frontend.partials.product_card', compact('product'))->render();
+            }
+            return response()->json([
+                'html' => $html, 
+                'hasMore' => $hasMore
+            ]);
+        }
+
+        return view('shop', compact('products', 'categories', 'brands', 'hasMore', 'total'));
     }
 
     public function flashSale(): View

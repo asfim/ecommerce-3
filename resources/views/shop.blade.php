@@ -16,7 +16,7 @@
 <div class="container-fluid px-2 px-md-4 section-pad pt-4 pb-5">
   <div class="row g-4">
     <!-- Desktop Sidebar -->
-    <div class="col-lg-2 d-none d-lg-block">
+    <div class="col-lg-2 d-none d-lg-block" style="position: sticky; top: 20px; max-height: calc(100vh - 40px); overflow-y: auto; padding-right: 10px;">
       <div class="filter-box mb-4 bg-white p-3 rounded shadow-sm border">
         <h6 class="fw-bold mb-3 border-bottom pb-2">Categories</h6>
         @foreach($categories as $category)
@@ -57,7 +57,7 @@
     <!-- Main Content -->
     <div class="col-lg-10">
       <div class="toolbar d-flex align-items-center justify-content-between mb-4 bg-white p-2 rounded shadow-sm border">
-        <span class="text-muted"><strong class="font-en text-dark">{{ $products instanceof \Illuminate\Pagination\LengthAwarePaginator ? $products->total() : $products->count() }}</strong> Products Found</span>
+        <span class="text-muted"><strong class="font-en text-dark">{{ !empty($total) ? $total : $products->count() }}</strong> Products Found</span>
         
         <div class="d-flex align-items-center gap-3 flex-wrap">
           <button type="button" class="btn btn-outline-primary btn-sm d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
@@ -82,16 +82,16 @@
         </div>
       @else
         <!-- Products Grid -->
-        <div class="row g-3">
+        <div class="row g-3" id="product-grid">
           @foreach($products as $product)
               @include('frontend.partials.product_card', ['product' => $product])
           @endforeach
         </div>
 
-        <!-- Pagination -->
-        <div class="mt-5 d-flex justify-content-center">
-            @if($products instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                {{ $products->withQueryString()->links() }}
+        <!-- Pagination / Load More -->
+        <div class="mt-5 d-flex justify-content-center" id="loadMoreContainer">
+            @if(isset($hasMore) && $hasMore)
+                <button type="button" id="loadMoreBtn" class="btn btn-primary px-5 py-2 rounded-pill fw-semibold">Load More</button>
             @endif
         </div>
       @endif
@@ -190,5 +190,45 @@
             document.getElementById('filterForm').submit();
         });
     });
+
+    let currentPage = 1;
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            currentPage++;
+            const form = document.getElementById('filterForm');
+            const url = new URL(form.action);
+            const formData = new FormData(form);
+            
+            for (const [key, value] of formData) {
+                url.searchParams.append(key, value);
+            }
+            url.searchParams.set('page', currentPage);
+            
+            const originalText = loadMoreBtn.innerText;
+            loadMoreBtn.innerText = 'Loading...';
+            loadMoreBtn.disabled = true;
+
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('product-grid').insertAdjacentHTML('beforeend', data.html);
+                if (!data.hasMore) {
+                    loadMoreBtn.style.display = 'none';
+                }
+                loadMoreBtn.innerText = originalText;
+                loadMoreBtn.disabled = false;
+            })
+            .catch(error => {
+                console.error('Error loading more products:', error);
+                loadMoreBtn.innerText = originalText;
+                loadMoreBtn.disabled = false;
+            });
+        });
+    }
 </script>
 @endsection
