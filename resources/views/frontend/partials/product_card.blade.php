@@ -126,12 +126,12 @@
                 @endif
 
                 @if ($displayImage)
-                    <img src="{{ asset('storage/' . $displayImage) }}" alt="{{ $product->name }}" class="prod-product-img">
+                    <img src="{{ asset('storage/' . $displayImage) }}" alt="{{ $product->name }}" class="prod-product-img" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-top-left-radius: 8px; border-top-right-radius: 8px;">
                 @else
                     <img
                         src="https://placehold.co/240x240/eee/aaa?text={{ urlencode(Str::limit($product->name, 8, '')) }}"
                         alt="{{ $product->name }}"
-                        class="prod-product-img">
+                        class="prod-product-img" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-top-left-radius: 8px; border-top-right-radius: 8px;">
                 @endif
             </div>
         </a>

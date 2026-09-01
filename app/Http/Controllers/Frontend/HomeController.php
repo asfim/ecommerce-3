@@ -333,19 +333,56 @@ class HomeController extends Controller
             ->withAvg('reviews', 'rating')
             ->withCount('reviews');
 
-        if (request()->query('sort') === 'best_selling') {
+        // Apply Category Filter
+        if (request()->has('categories') && is_array(request('categories'))) {
+            $query->whereIn('category_id', request('categories'));
+        }
+
+        // Apply Brand Filter
+        if (request()->has('brands') && is_array(request('brands'))) {
+            $query->whereIn('brand_id', request('brands'));
+        }
+
+        // Apply Price Range
+        if (request()->has('min_price') && request('min_price') !== null) {
+            $query->where('price', '>=', request('min_price'));
+        }
+        if (request()->has('max_price') && request('max_price') !== null) {
+            $query->where('price', '<=', request('max_price'));
+        }
+        
+        // Apply Stock Filter
+        if (request()->has('availability')) {
+            if (in_array('in_stock', request('availability'))) {
+                $query->where('stock', '>', 0);
+            }
+        }
+
+        // Apply Sorting
+        $sort = request()->query('sort');
+        if ($sort === 'best_selling') {
             $query->orderBy('sales_count', 'desc');
             $products = $query->take(12)->get();
+        } elseif ($sort === 'price_low') {
+            $query->orderBy('price', 'asc');
+            $products = $query->paginate(12)->appends(request()->query());
+        } elseif ($sort === 'price_high') {
+            $query->orderBy('price', 'desc');
+            $products = $query->paginate(12)->appends(request()->query());
         } else {
+            // Newest by default
             $query->latest();
             $products = $query->paginate(12)->appends(request()->query());
         }
 
-        if (request()->query('sort') === 'best_selling') {
+        $categories = \App\Models\Category::where('is_active', true)->get();
+        $brands = \App\Models\Brand::where('is_active', true)->get();
+
+        if ($sort === 'best_selling') {
             return view('bestsell', compact('products'));
         }
 
-        return view('shop', compact('products'));
+        return view('shop', compact('products', 'categories', 'brands'));
     }
 
     public function flashSale(): View
