@@ -123,16 +123,33 @@
             @endforeach
         </div>
         <style>
-            .category-slider::-webkit-scrollbar { display: none; }
+            .category-slider::-webkit-scrollbar,
+            .flash-sale-slider::-webkit-scrollbar { 
+                display: none; 
+            }
+            .slider-card-width {
+                width: 280px;
+            }
+            @media (min-width: 992px) {
+                .slider-card-width {
+                    width: calc(25% - 18px);
+                }
+            }
+            @media (max-width: 991px) and (min-width: 768px) {
+                .slider-card-width {
+                    width: calc(33.333% - 16px);
+                }
+            }
+            @media (max-width: 767px) {
+                .slider-card-width {
+                    width: calc(85%);
+                }
+            }
         </style>
     </div>
 </section>
 
 <!-- FLASH SALE -->
-@php
-    $maxDiscountPercent = \App\Models\Product::where('discount_type', 'percent')->where('discount_value', '>', 0)->frontendActive()->max('discount_value') ?? 0;
-    $maxDiscountPercent = round($maxDiscountPercent);
-@endphp
 <section class="flash-sale">
     <div class="container">
         <div class="row align-items-center">
@@ -193,15 +210,50 @@
                     $isNew = $product->created_at && $product->created_at->diffInDays(now()) < 30;
                     $hasDiscount = $product->has_active_discount;
                     $discountedPrice = $product->price;
+                    $discountPercent = 0;
+                    $badgeText = '';
+                    
                     if ($hasDiscount) {
                         if ($product->discount_type === 'percent') {
+                            $discountPercent = $product->discount_value;
                             $discountedPrice = $product->price - ($product->price * $product->discount_value) / 100;
+                            $badgeText = '-' . round($product->discount_value) . '%';
                         } else {
                             $discountedPrice = $product->price - $product->discount_value;
+                            $badgeText = '-৳' . round($product->discount_value);
+                            if ($product->price > 0) {
+                                $discountPercent = ($product->discount_value / $product->price) * 100;
+                            }
+                        }
+                    } elseif ($product->has_any_discount) {
+                        // Discount is in a variant. Find max variant discount for display.
+                        $hasDiscount = true;
+                        if (is_array($product->variants)) {
+                            foreach($product->variants as $v) {
+                                if (!empty($v['discount']) && $v['discount'] > 0) {
+                                    $vPrice = !empty($v['price']) ? $v['price'] : $product->price;
+                                    if (!empty($v['discount_type']) && $v['discount_type'] === 'percent') {
+                                        if ($v['discount'] > $discountPercent) {
+                                            $discountPercent = $v['discount'];
+                                            $discountedPrice = $vPrice - ($vPrice * $v['discount']) / 100;
+                                            $badgeText = '-' . round($v['discount']) . '%';
+                                        }
+                                    } else {
+                                        if ($vPrice > 0) {
+                                            $vp = ($v['discount'] / $vPrice) * 100;
+                                            if ($vp > $discountPercent) {
+                                                $discountPercent = $vp;
+                                                $discountedPrice = $vPrice - $v['discount'];
+                                                $badgeText = '-৳' . round($v['discount']);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 @endphp
-                <div class="flex-shrink-0" style="width: 280px; scroll-snap-align: start;">
+                <div class="flex-shrink-0 slider-card-width" style="scroll-snap-align: start;">
                     <div class="product-card flash-glass-card">
                         <div class="product-img">
                             <a href="{{ route('product.details', $product->slug) }}">
@@ -212,8 +264,8 @@
                                 @endif
                             </a>
                             
-                            @if($hasDiscount && $product->discount_type === 'percent')
-                                <span class="badge-product badge-sale">-{{ round($product->discount_value) }}%</span>
+                            @if($hasDiscount && !empty($badgeText))
+                                <span class="badge-product badge-sale">{{ $badgeText }}</span>
                             @elseif($isNew)
                                 <span class="badge-product badge-new">NEW</span>
                             @endif
@@ -448,18 +500,38 @@
         }
     }, 1000);
 
+    // Auto Slide Helper Function
+    function setupAutoSlide(slider, interval = 3000) {
+        if (!slider || !slider.firstElementChild) return;
+        
+        setInterval(() => {
+            // scroll amount = card width + gap approx
+            const scrollAmount = slider.firstElementChild.offsetWidth + 24; 
+            
+            // Check if reached end (added 10px buffer)
+            if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }, interval);
+    }
+
     // Category Slider Navigation
     const catSlider = document.querySelector('.category-slider');
     const catPrev = document.querySelector('.cat-prev');
     const catNext = document.querySelector('.cat-next');
 
-    if (catSlider && catPrev && catNext) {
-        catPrev.addEventListener('click', () => {
-            catSlider.scrollBy({ left: -300, behavior: 'smooth' });
-        });
-        catNext.addEventListener('click', () => {
-            catSlider.scrollBy({ left: 300, behavior: 'smooth' });
-        });
+    if (catSlider) {
+        setupAutoSlide(catSlider);
+        if (catPrev && catNext) {
+            catPrev.addEventListener('click', () => {
+                catSlider.scrollBy({ left: -(catSlider.firstElementChild.offsetWidth + 24), behavior: 'smooth' });
+            });
+            catNext.addEventListener('click', () => {
+                catSlider.scrollBy({ left: catSlider.firstElementChild.offsetWidth + 24, behavior: 'smooth' });
+            });
+        }
     }
 
     // Flash Sale Slider Navigation
@@ -467,13 +539,16 @@
     const fsPrev = document.querySelector('.fs-prev');
     const fsNext = document.querySelector('.fs-next');
 
-    if (fsSlider && fsPrev && fsNext) {
-        fsPrev.addEventListener('click', () => {
-            fsSlider.scrollBy({ left: -300, behavior: 'smooth' });
-        });
-        fsNext.addEventListener('click', () => {
-            fsSlider.scrollBy({ left: 300, behavior: 'smooth' });
-        });
+    if (fsSlider) {
+        setupAutoSlide(fsSlider);
+        if (fsPrev && fsNext) {
+            fsPrev.addEventListener('click', () => {
+                fsSlider.scrollBy({ left: -(fsSlider.firstElementChild.offsetWidth + 24), behavior: 'smooth' });
+            });
+            fsNext.addEventListener('click', () => {
+                fsSlider.scrollBy({ left: fsSlider.firstElementChild.offsetWidth + 24, behavior: 'smooth' });
+            });
+        }
     }
 </script>
 @endpush

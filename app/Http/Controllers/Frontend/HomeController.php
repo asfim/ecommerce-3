@@ -130,6 +130,13 @@ class HomeController extends Controller
             ->latest()
             ->take(12)
             ->get();
+            
+        $maxDiscount = Product::where('discount_type', 'percent')
+            ->where(function ($q) {
+                $q->whereNull('discount_expiry_date')
+                    ->orWhere('discount_expiry_date', '>=', now());
+            })
+            ->max('discount_value') ?? 50;
         $search = request()->query('search');
 
         if (request()->ajax() && request()->has('category_id')) {
