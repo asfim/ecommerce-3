@@ -644,7 +644,7 @@
     <div class="container">
         <div class="d-flex align-items-center gap-3 mb-4">
             <div class="related-section-bar"></div>
-            <h4 class="fw-bold mb-0">Related Products</h4>
+            <h4 class="fw-bold mb-0">Best Selling Products</h4>
         </div>
         <div class="row g-4">
             @foreach($relatedProducts as $rp)

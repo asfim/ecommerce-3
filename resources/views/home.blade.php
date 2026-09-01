@@ -389,7 +389,7 @@
             @endforeach
         </div>
         <div class="text-center mt-5">
-            <a href="{{ route('shop') }}" class="btn hero-btn hero-btn-primary px-5" style="text-decoration:none;">
+            <a href="{{ route('shop', ['sort' => 'best_selling']) }}" class="btn hero-btn hero-btn-primary px-5" style="text-decoration:none;">
                 VIEW ALL PRODUCTS
             </a>
         </div>

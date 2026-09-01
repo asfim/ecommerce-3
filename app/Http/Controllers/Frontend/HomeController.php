@@ -67,7 +67,7 @@ class HomeController extends Controller
                         $isActive = true;
                         if ($start && $start->gt($now)) $isActive = false;
                         if ($end && $end->lt($now)) $isActive = false;
-                        
+
                         if ($isActive) {
                             if ($v['discount_type'] === 'percent') {
                                 $pMax = max($pMax, (float) $v['discount']);
@@ -130,7 +130,7 @@ class HomeController extends Controller
             ->latest()
             ->take(12)
             ->get();
-            
+
         $maxDiscount = Product::where('discount_type', 'percent')
             ->where(function ($q) {
                 $q->whereNull('discount_expiry_date')
@@ -217,11 +217,11 @@ class HomeController extends Controller
     {
         $product = Product::frontendActive()->with('reviews')->where('slug', $slug)->firstOrFail();
         $relatedProducts = Product::frontendActive()
-            ->where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
             ->withAvg('reviews', 'rating')
             ->withCount('reviews')
-            ->take(4)
+            ->orderBy('sales_count', 'desc')
+            ->take(12)
             ->get();
 
         return view('product-details', compact('product', 'relatedProducts'));
@@ -258,12 +258,12 @@ class HomeController extends Controller
 
         // Sort
         $sort = $request->query('sort', '');
-        
+
         $priceExpression = "
-            CASE 
+            CASE
                 WHEN discount_type = 'percent' AND discount_value > 0 THEN price - (price * (discount_value / 100))
                 WHEN discount_type = 'flat' AND discount_value > 0 THEN price - discount_value
-                ELSE price 
+                ELSE price
             END
         ";
 
@@ -329,11 +329,21 @@ class HomeController extends Controller
 
     public function shop(): View
     {
-        $products = Product::frontendActive()
+        $query = Product::frontendActive()
             ->withAvg('reviews', 'rating')
-            ->withCount('reviews')
-            ->latest()
-            ->paginate(12);
+            ->withCount('reviews');
+
+        if (request()->query('sort') === 'best_selling') {
+            $query->orderBy('sales_count', 'desc');
+            $products = $query->take(12)->get();
+        } else {
+            $query->latest();
+            $products = $query->paginate(12)->appends(request()->query());
+        }
+
+        if (request()->query('sort') === 'best_selling') {
+            return view('bestsell', compact('products'));
+        }
 
         return view('shop', compact('products'));
     }
