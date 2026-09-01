@@ -1,0 +1,365 @@
+/* ==========================================================================
+   RESPONSIVE DESIGN RULES FOR E-COMMERCE TECH
+   ========================================================================== */
+
+/* ─── TABLET & MOBILE VIEWPORT (Under 992px) ─── */
+@media (max-width: 991.98px) {
+    html, body {
+        overflow-x: hidden !important;
+        width: 100%;
+    }
+
+    /* Hero section */
+    .hero-sec {
+        padding: 10px 0;
+    }
+
+    .carousel-item img.hero-slider-img {
+        height: 280px !important;
+    }
+
+    /* Product Grid Image wraps */
+    .prod-img-wrap {
+        height: 220px !important;
+    }
+
+    .mini-img-wrap {
+        height: 180px !important;
+    }
+
+    /* Product detail page main image */
+    .main-image {
+        height: 350px !important;
+    }
+}
+
+/* ─── MOBILE VIEWPORT (Under 768px) ─── */
+@media (max-width: 767.98px) {
+    .row {
+        margin-left: -10px !important;
+        margin-right: -10px !important;
+    }
+    .row > * {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    /* Carousel item heights and captions */
+    .carousel-item img.hero-slider-img {
+        height: 200px !important;
+    }
+
+    .hero-overlay-caption {
+        background: rgba(0, 0, 0, 0.45) !important;
+        align-items: center !important;
+        padding-bottom: 0 !important;
+        justify-content: center !important;
+        padding: 15px !important;
+    }
+
+    .hero-overlay-inner {
+        max-width: 100% !important;
+        text-align: center !important;
+    }
+
+    .hero-tagline {
+        font-size: 1.3rem !important;
+        margin-bottom: 8px !important;
+    }
+
+    .hero-slide-heading {
+        font-size: 1.3rem !important;
+        margin-bottom: 8px !important;
+    }
+
+    .hero-slide-text {
+        text-align: center !important;
+        padding: 10px !important;
+    }
+
+    .hero-slide-desc {
+        display: none !important; /* Hide description on mobile to save vertical space */
+    }
+
+    .btn.hero-slide-btn,
+    .btn.hero-btn-shop,
+    .btn.hero-btn-login,
+    .btn.hero-btn-register {
+        font-size: 11px !important;
+        padding: 6px 14px !important;
+    }
+
+    /* Product card actions spacing */
+    .product-card-actions {
+        flex-direction: row !important;
+        gap: 4px !important;
+    }
+
+    .product-card-actions button {
+        height: 32px !important;
+        padding: 2px 4px !important;
+        font-size: 10px !important;
+    }
+
+    /* Product grid columns gaps */
+    #products-grid .row {
+        --bs-gutter-x: 0.5rem !important;
+        --bs-gutter-y: 0.5rem !important;
+    }
+
+    /* Responsive image wrapper sizes to keep cards compact */
+    .prod-img-wrap {
+        height: 160px !important;
+    }
+
+    .mini-img-wrap {
+        height: 150px !important;
+    }
+
+    .prod-info {
+        padding: 10px !important;
+    }
+
+    .prod-info .t,
+    .latest-products-slider .product-title {
+        font-size: 0.85rem !important;
+        height: 2.2rem !important;
+        margin-bottom: 4px !important;
+    }
+
+    .prod-info .p,
+    .latest-products-slider .product-price {
+        font-size: 0.95rem !important;
+        margin-bottom: 6px !important;
+    }
+
+    /* Product detail page image & tabs */
+    .main-image {
+        height: 280px !important;
+    }
+
+    .thumb {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    #productDetailTabs button.nav-link {
+        padding: 10px 15px !important;
+        font-size: 12.5px !important;
+    }
+
+    /* Responsive listing pages */
+    .category-page {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    .category-page h1 {
+        font-size: 1.8rem !important;
+    }
+    .category-page .row.align-items-center.mb-5 {
+        margin-bottom: 1.5rem !important;
+    }
+}
+
+/* ─── EXTRA SMALL MOBILE SCREEN (Under 480px) ─── */
+@media (max-width: 479.98px) {
+    .carousel-item img.hero-slider-img {
+        height: 160px !important;
+    }
+
+    .hero-tagline,
+    .hero-slide-heading {
+        font-size: 1.1rem !important;
+    }
+
+    .prod-img-wrap {
+        height: 140px !important;
+    }
+
+    .mini-img-wrap {
+        height: 130px !important;
+    }
+
+    /* Ensure the search button doesn't stretch */
+    .search-input-wrap .btn {
+        padding: 0 12px !important;
+        font-size: 13px !important;
+    }
+
+    /* Newsletter compact layout on small screens */
+    .footer-newsletter {
+        max-width: 260px !important;
+    }
+    .footer-input {
+        font-size: 11.5px !important;
+        padding: 4px 8px !important;
+    }
+    .footer-subscribe-btn {
+        font-size: 11.5px !important;
+        padding: 4px 2px !important;
+    }
+}
+
+/* --- MOVED FROM STYLE.CSS --- */
+@media (max-width: 575px) {
+    .hero-overlay-caption {
+        padding: 0 4%;
+        background: linear-gradient(180deg, rgba(0, 0, 0, .55) 0%, rgba(0, 0, 0, .35) 100%);
+        align-items: flex-end;
+        padding-bottom: 40px;
+    }
+
+    .hero-overlay-inner {
+        max-width: 100%;
+    }
+
+    .hero-tagline {
+        font-size: 1.1rem;
+    }
+
+    .hero-motto {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .brand-banner,
+    .season-banner {
+        height: 180px;
+    }
+}
+
+@media (min-width: 576px) {
+    .discounted-product-card {
+        min-width: calc(33.333% - 10px);
+        flex: 0 0 calc(33.333% - 10px);
+    }
+}
+
+@media (min-width: 992px) {
+    .discounted-product-card {
+        min-width: calc(25% - 11.25px);
+        flex: 0 0 calc(25% - 11.25px);
+    }
+}
+
+@media (max-width: 767px) {
+    .preorder-hero {
+        margin-bottom: 12px;
+    }
+
+    .discounted-slider {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .footlinks {
+        padding: 14px 0;
+    }
+
+    .footlinks .item {
+        min-height: 42px;
+        font-size: 12px;
+    }
+
+    .footer-col {
+        padding-top: 4px;
+    }
+}
+
+
+/* ==========================================================================
+   MOBILE RESPONSIVE CART & BUY BUTTONS TO CIRCULAR ICONS
+   ========================================================================== */
+@media (max-width: 767.98px) {
+
+    /* Stack actions vertically (one under the other) when they are together */
+    .product-card-actions,
+    .details-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        gap: 6px !important;
+    }
+
+    /* Style the action buttons on mobile (full width, proper height, visible text) */
+    .btn-add-to-cart,
+    .btn-buy-now,
+    .add-to-cart-btn,
+    .btn-bid,
+    .add-to-cart-detail,
+    .buy-now-detail {
+        width: 100% !important;
+        height: 34px !important;
+        min-width: 0 !important;
+        padding: 4px 8px !important;
+        border-radius: 6px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        flex: 1 1 auto !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+
+    /* Centering actions wrapper on mobile */
+    .prod-info .mt-2.d-flex,
+    .mini-prod .mt-2 {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 6px !important;
+    }
+
+    /* Hide icons inside all details and list action buttons on mobile */
+    .add-to-cart-btn i,
+    .btn-bid i,
+    .add-to-cart-detail i,
+    .buy-now-detail i {
+        display: none !important;
+    }
+
+    /* Ensure text spans inside all action buttons are shown on mobile */
+    .add-to-cart-btn span,
+    .btn-bid span,
+    .add-to-cart-detail span,
+    .buy-now-detail span {
+        display: inline !important;
+    }
+
+    /* Specific styles for New Arrival section on mobile */
+    .new-arrival-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        gap: 6px !important;
+        width: auto !important;
+    }
+
+    .new-arrival-actions .add-to-cart-btn,
+    .new-arrival-actions .btn-bid {
+        width: auto !important;
+        height: 24px !important;
+        min-width: 0 !important;
+        padding: 2px 8px !important;
+        border-radius: 6px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 10px !important;
+        font-weight: 600 !important;
+        flex: 1 1 auto !important;
+        margin: 0 !important;
+    }
+
+    .newarrival-item img {
+        width: 75px !important;
+        height: 75px !important;
+        flex: 0 0 75px !important;
+    }
+}
