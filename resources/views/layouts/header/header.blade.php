@@ -37,7 +37,7 @@
             </div>
 
             <!-- DESKTOP MENU -->
-            <div class="col-lg-5 d-none d-lg-block">
+            <div class="col-lg-4 d-none d-lg-block">
                 <ul class="navbar-nav flex-row justify-content-center gap-4 fw-semibold" style="font-size: 15px; margin: 0; padding: 0;">
                     <li class="nav-item">
                         <a class="nav-link text-dark {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
@@ -68,7 +68,7 @@
                 </form>
             </div>
             <!-- ICONS & MOBILE TOGGLE -->
-            <div class="col-6 col-lg-2">
+            <div class="col-6 col-lg-3">
                 <div class="d-flex justify-content-end gap-2 align-items-center">
                     
                     @if (auth()->guard('admin')->check())
@@ -102,9 +102,10 @@
                             </ul>
                         </div>
                     @else
-                        <a class="head-icon" href="{{ route('user.login') }}" style="text-decoration:none;">
-                            <i class="bi bi-person"></i>
-                        </a>
+                        <div class="d-none d-lg-flex gap-2">
+                            <a href="{{ route('user.login') }}" class="btn btn-outline-dark btn-sm rounded-pill fw-bold px-3">Login</a>
+                            <a href="{{ route('user.register') }}" class="btn btn-primary btn-sm rounded-pill fw-bold px-3 text-white">Register</a>
+                        </div>
                     @endif
 
                     
@@ -126,14 +127,23 @@
             </div>
 
             <!-- MOBILE SEARCH -->
-            <div class="col-12 d-lg-none">
-                <form action="{{ route('home') }}" method="GET" class="search-wrapper">
-                    <input type="text" name="search" placeholder="Search products..." value="{{ request()->query('search') }}" class="search-input-field" autocomplete="off">
-                    <button type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
-                    <div class="search-results-dropdown d-none position-absolute w-100 bg-white border rounded shadow mt-1 p-2" style="z-index: 1050; top: 100%; left: 0; max-height: 350px; overflow-y: auto;"></div>
-                </form>
+            <div class="col-12 d-lg-none mt-2">
+                <div class="d-flex align-items-center gap-2">
+                    <form action="{{ route('home') }}" method="GET" class="search-wrapper flex-grow-1 m-0">
+                        <input type="text" name="search" placeholder="Search..." value="{{ request()->query('search') }}" class="search-input-field w-100" autocomplete="off" style="padding-left:15px; height: 45px;">
+                        <button type="submit" style="height: 37px; width: 37px; right: 4px; top: 4px;">
+                            <i class="bi bi-search"></i>
+                        </button>
+                        <div class="search-results-dropdown d-none position-absolute w-100 bg-white border rounded shadow mt-1 p-2" style="z-index: 1050; top: 100%; left: 0; max-height: 350px; overflow-y: auto;"></div>
+                    </form>
+                    
+                    @if (!auth()->guard('web')->check() && !auth()->guard('admin')->check())
+                        <div class="d-flex flex-nowrap gap-1">
+                            <a href="{{ route('user.login') }}" class="btn btn-outline-dark rounded-pill fw-bold text-center" style="font-size: 11px; padding: 6px 12px; white-space: nowrap;">Login</a>
+                            <a href="{{ route('user.register') }}" class="btn btn-primary rounded-pill fw-bold text-white text-center" style="font-size: 11px; padding: 6px 12px; white-space: nowrap;">Register</a>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
 

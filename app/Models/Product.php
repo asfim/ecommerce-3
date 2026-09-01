@@ -82,7 +82,7 @@ class Product extends Model
 
     public function scopeFrontendActive($query)
     {
-        return $query->where('is_active', true)
+        return $query->with('category')->where('is_active', true)
             ->where(function ($q) {
                 $q->whereNull('discount_expiry_date')
                     ->orWhere('discount_expiry_date', '>=', now());

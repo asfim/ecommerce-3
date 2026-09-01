@@ -87,8 +87,8 @@ img {
 .search-wrapper input {
     width: 100%;
     height: 50px;
-    border: 2px solid #f0f0f0;
-    background: #fafafa;
+    border: 1.5px solid #ff6b35;
+    background: #fff;
     border-radius: 50px;
     padding: 0 60px 0 20px;
     outline: none;
@@ -132,6 +132,15 @@ img {
     background: #14213d;
     color: #fff;
     transform: translateY(-2px);
+}
+
+.head-icon-dark {
+    background: #878f9c !important;
+    color: #fff !important;
+}
+
+.head-icon-dark:hover {
+    background: #14213d !important;
 }
 
 .counter {
