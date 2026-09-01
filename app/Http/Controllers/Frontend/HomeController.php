@@ -95,7 +95,7 @@ class HomeController extends Controller
             ->with('category')
             ->withAvg('reviews', 'rating')
             ->withCount('reviews')
-            ->latest()
+            ->orderBy('sales_count', 'desc')
             ->take(10)
             ->get();
         $discountedProducts = Product::frontendActive()
