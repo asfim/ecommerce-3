@@ -396,33 +396,31 @@
     </div>
 </section>
 
-<!-- MEN WOMEN OFFER -->
-<section class="section-padding">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-6">
-                <div class="offer-card offer-men">
-                    <div>
-                        <small>MEN COLLECTION</small>
-                        <h3>Modern Style<br>For Men</h3>
-                        <p>Shirt, Panjabi, T-Shirt, Jeans এবং আরও অনেক কিছু।</p>
-                        <a href="{{ route('shop') }}" class="btn hero-btn hero-btn-light">SHOP MEN</a>
-                    </div>
+<!-- CATEGORY WISE PRODUCTS -->
+@foreach($homeCategories as $index => $category)
+    @if($category->products->count() > 0)
+        <section class="section-padding {{ $index % 2 == 1 ? 'bg-light' : '' }}">
+            <div class="container">
+                <div class="section-head text-center">
+                    <span>{{ $category->name }} Collection</span>
+                    <h2>Top {{ $category->name }}</h2>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="offer-card offer-women">
-                    <div>
-                        <small>WOMEN COLLECTION</small>
-                        <h3>Elegant Style<br>For Women</h3>
-                        <p>Saree, Kurti, Three Piece, Tops এবং premium collection।</p>
-                        <a href="{{ route('shop') }}" class="btn hero-btn hero-btn-light">SHOP WOMEN</a>
-                    </div>
+                <div class="row g-4" id="category-products-{{ $category->id }}">
+                    @foreach($category->products->take(4) as $product)
+                        @include('frontend.partials.product_card', ['product' => $product])
+                    @endforeach
                 </div>
+                @if($category->products_count > 4)
+                    <div class="text-center mt-5" id="load-more-container-{{ $category->id }}">
+                        <button class="btn hero-btn hero-btn-primary px-5 load-more-category-btn" data-category="{{ $category->id }}" data-page="2">
+                            Load More
+                        </button>
+                    </div>
+                @endif
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+    @endif
+@endforeach
 
 
 
@@ -550,6 +548,43 @@
             });
         }
     }
+
+    // Load More Category Products
+    document.querySelectorAll('.load-more-category-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const categoryId = this.dataset.category;
+            let page = parseInt(this.dataset.page);
+            const originalText = this.innerText;
+            this.innerText = 'Loading...';
+            this.disabled = true;
+
+            fetch(`/?category_id=${categoryId}&page=${page}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.html) {
+                    document.getElementById(`category-products-${categoryId}`).insertAdjacentHTML('beforeend', data.html);
+                    this.dataset.page = page + 1;
+                }
+                
+                if (!data.has_more) {
+                    this.parentElement.style.display = 'none';
+                } else {
+                    this.innerText = originalText;
+                    this.disabled = false;
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                this.innerText = originalText;
+                this.disabled = false;
+            });
+        });
+    });
 </script>
 @endpush
 

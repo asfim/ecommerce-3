@@ -143,7 +143,7 @@ class HomeController extends Controller
             $categoryId = request()->query('category_id');
             $page = (int) request()->query('page', 1);
             $limit = 4;
-            $offset = 8 + ($page - 2) * 4;
+            $offset = 4 + ($page - 2) * 4;
 
             $productsQuery = Product::where('category_id', $categoryId)
                 ->frontendActive()
