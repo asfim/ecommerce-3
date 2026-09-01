@@ -56,6 +56,9 @@ img {
     background: #fff;
     border-bottom: 1px solid #eee;
     padding: 18px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
 }
 
 .brand {
@@ -181,9 +184,9 @@ img {
 .hero {
     background:
         linear-gradient(100deg,
-            rgba(20, 33, 61, .95) 0%,
-            rgba(111, 66, 193, .80) 47%,
-            rgba(232, 62, 140, .35) 100%),
+            rgba(20, 33, 61, .85) 0%,
+            rgba(111, 66, 193, .70) 47%,
+            rgba(232, 62, 140, .25) 100%),
         url('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1800&q=90');
 
     background-size: cover;
@@ -881,43 +884,224 @@ footer ul a:hover {
         padding-bottom: 70px;
     }
 
+    /* ── HERO ── */
     .hero {
-        min-height: 470px;
+        min-height: auto;
+        padding: 50px 0 60px;
+        background-position: right center !important;
     }
 
     .hero h1 {
-        font-size: 38px;
+        font-size: 22px;
+        line-height: 1.2;
     }
 
     .hero p {
-        font-size: 14px;
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .hero-badge {
+        font-size: 10px;
+        padding: 6px 14px;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
     }
 
     .hero-btn {
-        padding: 13px 18px;
-        font-size: 13px;
+        padding: 9px 15px;
+        font-size: 11px;
+        border-radius: 8px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero:before {
+        width: 150px;
+        height: 150px;
+        top: -50px;
+    }
+
+    .hero:after {
+        width: 100px;
+        height: 100px;
+        bottom: -30px;
+    }
+
+    /* ── FEATURES ── */
+    .feature-card {
+        padding: 12px 8px;
+        gap: 8px;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        border-radius: 14px;
+    }
+
+    .feature-icon {
+        min-width: 40px;
+        height: 40px;
+        font-size: 18px;
+        border-radius: 12px;
+    }
+
+    .feature-card h6 {
+        font-size: 12px;
+        margin: 0 0 2px;
+    }
+
+    .feature-card p {
+        font-size: 10px;
+    }
+
+    /* ── SECTION ── */
+    .section-padding {
+        padding: 50px 0;
+    }
+
+    .section-head {
+        margin-bottom: 25px;
     }
 
     .section-head h2 {
-        font-size: 30px;
+        font-size: 24px;
     }
 
+    /* ── CATEGORIES ── */
     .category-card {
-        height: 320px;
+        height: 250px;
+        border-radius: 16px;
     }
 
-    .product-img img {
-        height: 260px;
+    /* ── FLASH SALE ── */
+    .flash-sale {
+        padding: 35px 0 30px;
+        text-align: center;
     }
 
-    .product-info {
-        padding: 14px;
+    .flash-sale small {
+        font-size: 11px;
+        letter-spacing: 1.5px;
     }
 
     .flash-sale h2 {
-        font-size: 34px;
+        font-size: 24px;
+        line-height: 1.3;
     }
 
+    .flash-sale p {
+        font-size: 13px;
+    }
+
+    .flash-sale .col-lg-5 {
+        text-align: center !important;
+        align-items: center !important;
+    }
+
+    .countdown {
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 8px;
+    }
+
+    .time-box {
+        width: 65px;
+        height: 65px;
+        border-radius: 12px;
+    }
+
+    .time-box strong {
+        font-size: 20px;
+    }
+
+    .time-box span {
+        font-size: 8px;
+        letter-spacing: 0.5px;
+    }
+
+    .flash-sale:after {
+        font-size: 80px;
+    }
+
+    /* ── Flash Sale Slider Cards ── */
+    .slider-card-width {
+        min-width: 200px !important;
+        max-width: 200px !important;
+    }
+
+    .flash-glass-card .product-img img {
+        height: 160px !important;
+    }
+
+    .flash-glass-card .product-info {
+        padding: 12px !important;
+    }
+
+    .flash-glass-card .product-title {
+        font-size: 13px !important;
+    }
+
+    .flash-glass-card .price {
+        font-size: 15px !important;
+    }
+
+    .flash-glass-card .add-cart {
+        width: 34px !important;
+        height: 34px !important;
+        border-radius: 10px !important;
+        font-size: 14px !important;
+    }
+
+    /* ── PRODUCT CARDS (Best Selling) ── */
+    .product-img img {
+        height: 170px;
+    }
+
+    .product-info {
+        padding: 12px;
+    }
+
+    .product-title {
+        font-size: 13px !important;
+    }
+
+    .product-category {
+        font-size: 9px;
+    }
+
+    .price {
+        font-size: 15px;
+    }
+
+    .old-price {
+        font-size: 11px;
+    }
+
+    .product-info .d-flex.justify-content-between {
+        gap: 6px;
+    }
+
+    /* Keep add-cart as icon button in best selling cards */
+    .product-card .add-cart {
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+        border-radius: 10px !important;
+        padding: 0 !important;
+        font-size: 14px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 auto !important;
+    }
+
+    .product-card .add-cart i {
+        display: inline-block !important;
+    }
+
+    /* ── NEWSLETTER ── */
     .newsletter {
         padding: 35px 20px;
         border-radius: 20px;
@@ -940,6 +1124,7 @@ footer ul a:hover {
         width: 100%;
     }
 
+    /* ── MOBILE BOTTOM NAV ── */
     .mobile-bottom {
         display: flex;
         position: fixed;

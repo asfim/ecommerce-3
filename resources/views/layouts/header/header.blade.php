@@ -107,10 +107,6 @@
                         </a>
                     @endif
 
-                    <a class="head-icon" href="#" style="text-decoration:none;">
-                        <i class="bi bi-heart"></i>
-                        <span class="counter">0</span>
-                    </a>
                     
                     <div class="dropdown">
                         <a class="head-icon dropdown-toggle no-arrow" href="#" data-bs-toggle="dropdown" id="cartDropdownDesktop" style="text-decoration:none;">

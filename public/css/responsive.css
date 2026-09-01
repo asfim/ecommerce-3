@@ -5,7 +5,7 @@
 /* ─── TABLET & MOBILE VIEWPORT (Under 992px) ─── */
 @media (max-width: 991.98px) {
     html, body {
-        overflow-x: hidden !important;
+        overflow-x: clip !important;
         width: 100%;
     }
 
@@ -276,7 +276,7 @@
 @media (max-width: 767.98px) {
 
     /* Stack actions vertically (one under the other) when they are together */
-    .product-card-actions,
+    .prod-card .product-card-actions,
     .details-actions {
         display: flex !important;
         flex-direction: column !important;
@@ -286,10 +286,10 @@
     }
 
     /* Style the action buttons on mobile (full width, proper height, visible text) */
-    .btn-add-to-cart,
-    .btn-buy-now,
-    .add-to-cart-btn,
-    .btn-bid,
+    .prod-card .btn-add-to-cart,
+    .prod-card .btn-buy-now,
+    .prod-card .add-to-cart-btn,
+    .prod-card .btn-bid,
     .add-to-cart-detail,
     .buy-now-detail {
         width: 100% !important;
@@ -315,17 +315,17 @@
         gap: 6px !important;
     }
 
-    /* Hide icons inside all details and list action buttons on mobile */
-    .add-to-cart-btn i,
-    .btn-bid i,
+    /* Hide icons inside prod-card action buttons on mobile */
+    .prod-card .add-to-cart-btn i,
+    .prod-card .btn-bid i,
     .add-to-cart-detail i,
     .buy-now-detail i {
         display: none !important;
     }
 
-    /* Ensure text spans inside all action buttons are shown on mobile */
-    .add-to-cart-btn span,
-    .btn-bid span,
+    /* Ensure text spans inside prod-card action buttons are shown on mobile */
+    .prod-card .add-to-cart-btn span,
+    .prod-card .btn-bid span,
     .add-to-cart-detail span,
     .buy-now-detail span {
         display: inline !important;

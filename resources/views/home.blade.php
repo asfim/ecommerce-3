@@ -13,7 +13,7 @@
     $heroTitle = \App\Models\HomepageSetting::get('hero_title', "বাংলাদেশের\n<span>রঙে</span><br>\nআপনার Fashion");
     $heroSubtitle = \App\Models\HomepageSetting::get('hero_subtitle', "Premium Panjabi, Saree, Three Piece, T-Shirt,\nShirt এবং নতুন Fashion Collection এখন এক জায়গায়।");
 @endphp
-<section class="hero" style="background-image: linear-gradient(100deg, rgba(20,33,61,.95) 0%, rgba(111,66,193,.80) 47%, rgba(232,62,140,.35) 100%), {!! $heroBg !!}; background-size: cover; background-position: center;">
+<section class="hero" style="background-image: linear-gradient(100deg, rgba(20,33,61,.85) 0%, rgba(111,66,193,.70) 47%, rgba(232,62,140,.25) 100%), {!! $heroBg !!}; background-size: cover; background-position: center;">
     <div class="container">
         <div class="hero-content">
             <span class="hero-badge">
@@ -152,11 +152,11 @@
                     </div>
                     <div class="time-box">
                         <strong id="minutes">30</strong>
-                        <span>MINUTES</span>
+                        <span>MINS</span>
                     </div>
                     <div class="time-box">
                         <strong id="seconds">45</strong>
-                        <span>SECONDS</span>
+                        <span>SECS</span>
                     </div>
                 </div>
             </div>

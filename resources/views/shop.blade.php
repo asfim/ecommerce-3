@@ -57,14 +57,15 @@
     <!-- Main Content -->
     <div class="col-lg-10">
       <div class="toolbar d-flex align-items-center justify-content-between mb-4 bg-white p-2 rounded shadow-sm border">
-        <span class="text-muted"><strong class="font-en text-dark">{{ !empty($total) ? $total : $products->count() }}</strong> Products Found</span>
-        
-        <div class="d-flex align-items-center gap-3 flex-wrap">
-          <button type="button" class="btn btn-outline-primary btn-sm d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="btn btn-primary text-white d-lg-none" style="font-size: 12px; padding: 4px 10px;" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
             <i class="bi bi-sliders"></i> Filter
           </button>
-          
-          <select name="sort" class="form-select sort-select auto-submit" style="width:auto; cursor:pointer;">
+          <span class="text-muted" style="font-size: 13px;"><strong class="font-en text-dark">{{ !empty($total) ? $total : $products->count() }}</strong> <span class="d-none d-sm-inline">Products Found</span><span class="d-inline d-sm-none">Products</span></span>
+        </div>
+        
+        <div class="d-flex align-items-center">
+          <select name="sort" class="form-select sort-select auto-submit" style="width:auto; cursor:pointer; font-size: 12px; padding: 4px 24px 4px 10px;">
             <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Newest Arrivals</option>
             <option value="best_selling" {{ request('sort') == 'best_selling' ? 'selected' : '' }}>Best Selling</option>
             <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Price: Low to High</option>

@@ -78,10 +78,7 @@
         <i class="bi bi-grid"></i>
         Shop
     </a>
-    <a href="#" style="text-decoration:none;">
-        <i class="bi bi-heart"></i>
-        Wishlist
-    </a>
+
     <a href="/checkout" style="text-decoration:none;">
         <i class="bi bi-bag"></i>
         Cart
